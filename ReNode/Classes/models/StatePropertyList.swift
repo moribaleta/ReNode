@@ -23,7 +23,7 @@ import Foundation
             }
         ````
  */
-public class StatePropertyList<T> : StatePropertyType, StateClearable, Equatable {
+public class StatePropertyList<T> : StatePropertyType, Equatable {
     
     public static func == (lhs: StatePropertyList<T>, rhs: StatePropertyList<T>) -> Bool {
         
@@ -119,7 +119,7 @@ public class StatePropertyList<T> : StatePropertyType, StateClearable, Equatable
         self.isDirty        = false
         
         (self.list as? [StateClearable])?.forEach({ (clearable) in
-            clearable.clear()
+            clearable.clearFlag()
         })
     }
     

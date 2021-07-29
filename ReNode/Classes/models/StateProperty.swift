@@ -11,7 +11,7 @@ import Foundation
 /**
  generic class for wrapping the variables in ReducerState
  */
-public class StatePropertyType {
+public class StatePropertyType: StateClearable {
     ///determines whether  the object has changed
     public var isDirty : Bool = false
     
@@ -19,7 +19,16 @@ public class StatePropertyType {
      - clears the changes of the object
      - ATTENTION: override this function
      */
+    @available(*, deprecated, renamed: "clearFlag")
     public func clear () {
+        
+    }
+    
+    /**
+     - clears the changes of the object
+     - ATTENTION: override this function
+     */
+    public func clearFlag () {
         
     }
 }
@@ -27,7 +36,7 @@ public class StatePropertyType {
 /**
  generic class for wrapping the variables in ReducerState
  */
-public class StateProperty<T> : StatePropertyType {
+public class StateProperty<T> : StatePropertyType,  {
     
     /**
      - contains the value of the StateProperty
@@ -65,6 +74,10 @@ public class StateProperty<T> : StatePropertyType {
     }
     
     public override func clear() {
+        self.isDirty = false
+    }
+    
+    public override func clearFlag() {
         self.isDirty = false
     }
     
