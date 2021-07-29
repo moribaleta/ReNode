@@ -90,7 +90,7 @@ open class ReSingleStateController<E, V> : ReBaseController<E,E,V> where E : Sta
     
     ///override this function to listen to state changes before the state is published
     open override func onStatePreRender(state: E) {
-        
+        super.onStatePreRender(state: state)
     }
     
 }
