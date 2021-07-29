@@ -1,0 +1,10 @@
+use_frameworks!
+target 'ReNode_Tests' do
+  pod 'ReNode', :path => '../'
+  
+  pod "Texture"
+  pod 'ReSwift'
+  pod 'ReSwiftThunk'
+  pod 'RxSwift', '6.2.0'
+  pod 'RxCocoa', '6.2.0'
+end
