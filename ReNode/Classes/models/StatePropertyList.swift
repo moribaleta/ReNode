@@ -99,7 +99,22 @@ public class StatePropertyList<T> : StatePropertyType, StateClearable, Equatable
         - NOTE:
             - overriden from StatePropertyType
     */
+    @available(*, deprecated, renamed: "clearFlag")
     public override func clear() {
+        self.changes        = []
+        self.isDirty        = false
+        
+        (self.list as? [StateClearable])?.forEach({ (clearable) in
+            clearable.clear()
+        })
+    }
+    
+    /**
+        clears the flag of isDirty and also the changes
+        - NOTE:
+            - overriden from StatePropertyType
+    */
+    public override func clearFlag() {
         self.changes        = []
         self.isDirty        = false
         
@@ -306,7 +321,15 @@ extension StatePropertyList where T : Markable {
     protocol used for identifying the type of the list as a StatePropertyList
  */
 public protocol StateClearable {
+    /**
+        clears the arrays - changes, added, remove
+        - NOTE:
+            - overriden from StatePropertyType
+    */
+    @available(*, deprecated, renamed: "clearFlag")
     func clear()
+
+    func clearFlag()
 }
 
 
