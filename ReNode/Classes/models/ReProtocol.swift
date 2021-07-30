@@ -24,15 +24,13 @@ public protocol ReProtocol : class {
     
     associatedtype StateType
     
-    @available(*, deprecated, message: "please use reactiveBind")
-    func reBind(obx: Observable<StateType>)
-    
-    @available(*, deprecated, message: "please use reactiveUpdate")
-    func reUpdate(value: StateType)
+    var disposeBag : DisposeBag {get set}
     
     func reactiveBind(obx: Observable<StateType>)
     
     func reactiveUpdate(value: StateType)
+    
+    func renderState(value: StateType)
     
 }//ReactiveProtocol
 
@@ -46,13 +44,7 @@ public extension ReProtocol {
         
     }
     
-    @available(*, deprecated, message: "please use reactiveBind")
-    func reBind(obx: Observable<StateType>) {
-        
-    }
-    
-    @available(*, deprecated, message: "please use reactiveUpdate")
-    func reUpdate(value: StateType) {
+    func renderState(value: StateType) {
         
     }
     

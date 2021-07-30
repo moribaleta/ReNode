@@ -36,7 +36,7 @@ public class StatePropertyType: StateClearable {
 /**
  generic class for wrapping the variables in ReducerState
  */
-public class StateProperty<T> : StatePropertyType,  {
+public class StateProperty<T> : StatePropertyType {
     
     /**
      - contains the value of the StateProperty
