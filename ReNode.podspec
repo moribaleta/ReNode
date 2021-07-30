@@ -30,7 +30,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '11'
 
-  s.source_files = 'ReNode/Classes/**/*'
+  s.source_files = 'ReNode/Classes/**/*.{swift}'
 
   s.dependency "Texture"
   s.dependency "ReSwift"
