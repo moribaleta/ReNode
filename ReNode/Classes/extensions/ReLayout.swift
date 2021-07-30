@@ -1,14 +1,12 @@
 //
-//  ReLayout.swift
-//  SampleApp
+//  FunctionalizedLayout.swift
+//  SMDModuleUtility
 //
-//  Created by Gabriel Mori Baleta on 7/30/21.
+//  Created by Michael Ong on 7/9/21.
+//  Copyright © 2021 Leapfroggr Inc. All rights reserved.
 //
 
-import Foundation
 import AsyncDisplayKit
-import ReNode
-
 
 @resultBuilder
 public struct LayoutBuilder {
@@ -51,7 +49,10 @@ public struct LayoutBuilder {
     public static func buildBlock(_ components: ASLayoutElement?...) -> [ASLayoutElement] {
         components.compactMap { $0 }
     }
+    
 }
+
+public typealias LayoutElement = (() -> ASLayoutElement)
 
 extension ASWrapperLayoutSpec {
     public convenience init(@LayoutBuilder _ children: () -> [ASLayoutElement]) {
@@ -162,17 +163,73 @@ extension ASInsetLayoutSpec {
     
 }
 
+extension ASLayoutSpec {
+    
+    public static var empty : ASLayoutSpec {
+        return .init()
+    }
+    
+    public static func conditional(_ logic: Bool, true: LayoutElement?, false: LayoutElement? = nil) -> ASLayoutSpec {
+        ASWrapperLayoutSpec {
+            if (logic)  {
+                return [`true`?() ?? ASLayoutSpec.empty]
+            } else {
+                return [`false`?() ?? ASStackLayoutSpec.empty]
+            }
+        }
+    }
+    
+}
+
+extension ASRelativeLayoutSpec {
+    
+    public func horizontalPosition(_ positon: ASRelativeLayoutSpecPosition = .start) -> Self {
+        self.horizontalPosition = positon
+        return self
+    }
+    
+    public func verticalPosition(_ positon: ASRelativeLayoutSpecPosition = .start) -> Self {
+        self.horizontalPosition = positon
+        return self
+    }
+    
+    public func sizingOption(_ sizing: ASRelativeLayoutSpecSizingOption = .minimumSize) -> Self {
+        self.sizingOption = sizing
+        return self
+    }
+
+}
+
 extension ASLayoutElement {
     
-    public static func horizontalStack (@LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
+    public static func hStackSpec (@LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
         return ASStackLayoutSpec.horizontal(spacing: 10, children)
     }
     
-    public static func verticalStack (@LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
+    public static func vStackSpec (@LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
         return ASStackLayoutSpec.vertical(spacing: 10, children)
     }
     
+    public func relativeSpec(horizontalPosition: ASRelativeLayoutSpecPosition = .start, verticalPosition: ASRelativeLayoutSpecPosition = .start, sizingOption: ASRelativeLayoutSpecSizingOption = .minimumSize) -> ASRelativeLayoutSpec {
+        ASRelativeLayoutSpec(
+            horizontalPosition  : horizontalPosition,
+            verticalPosition    : verticalPosition,
+            sizingOption        : sizingOption,
+            child               : self)
+    }
+    
+    public func overlaySpec(_ overlay: () -> ASLayoutElement) -> ASOverlayLayoutSpec {
+        ASOverlayLayoutSpec(
+            child   : self,
+            overlay : overlay())
+    }
+    
+    @available(*, deprecated, renamed: "insets")
     public func inset(edges: UIEdgeInsets) -> ASLayoutSpec {
+        ASInsetLayoutSpec(insets: edges, child: self)
+    }
+    
+    public func insets(_ edges: UIEdgeInsets) -> ASLayoutSpec {
         ASInsetLayoutSpec(insets: edges, child: self)
     }
     
