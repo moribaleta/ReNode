@@ -32,7 +32,7 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'ReNode/Classes/**/*.{swift}'
 
-  s.dependency "Texture"
+  s.dependency "Texture", '~> 3.0.0'
   s.dependency "ReSwift"
   s.dependency "ReSwiftThunk"
   s.dependency "RxSwift", '~> 6.2.0'
