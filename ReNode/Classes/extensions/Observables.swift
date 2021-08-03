@@ -265,6 +265,26 @@ public extension ObservableType where Element == NSString {
     }
 }
 
+public extension ObservableType {
+    
+    func flatMapConditional<T> (condition: @escaping (Self.Element) -> Bool, _ true: @escaping (Self.Element)-> Observable<T>, false: @escaping (Self.Element) -> Observable<T>) -> Observable<T> {
+        self.flatMap { val in
+            condition(val) ?
+                `true`(val) :
+                `false`(val)
+        }
+    }
+    
+    func mapConditional<T> (condition: @escaping (Self.Element) -> Bool, _ true: @escaping (Self.Element)-> T, false: @escaping (Self.Element) -> T) -> Observable<T> {
+        self.map { val in
+            condition(val) ?
+                `true`(val) :
+                `false`(val)
+        }
+    }
+    
+}
+
 public extension ObservableType where Element == Bool {
     
     func doLogic (_ true: @escaping ()->Void,_ else: @escaping ()->Void ) -> Observable<Void> {

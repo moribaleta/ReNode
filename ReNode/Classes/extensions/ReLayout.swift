@@ -1,13 +1,3 @@
-//
-//  FunctionalizedLayout.swift
-//  SMDModuleUtility
-//
-//  Created by Michael Ong on 7/9/21.
-//  Copyright © 2021 Leapfroggr Inc. All rights reserved.
-//
-
-import AsyncDisplayKit
-
 @resultBuilder
 public struct LayoutBuilder {
     public static func buildExpression<Node: ASDisplayNode>(_ expression: Node?) -> ASLayoutElement? {
@@ -126,6 +116,19 @@ extension ASStackLayoutSpec {
 }
 
 extension ASDisplayNode {
+    public static func Group(@LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASDisplayNode {
+        
+        let items = children()
+        
+        let node = ASDisplayNode()
+        node.automaticallyManagesSubnodes = true
+        node.layoutSpecBlock = { node, size in
+            ASWrapperLayoutSpec(layoutElements: items)
+        }
+        
+        return node
+    }
+    
     public convenience init(@LayoutBuilder _ children: @escaping () -> [ASLayoutElement]) {
         self.init()
         
@@ -165,6 +168,7 @@ extension ASInsetLayoutSpec {
 
 extension ASLayoutSpec {
     
+    
     public static var empty : ASLayoutSpec {
         return .init()
     }
@@ -177,6 +181,14 @@ extension ASLayoutSpec {
                 return [`false`?() ?? ASStackLayoutSpec.empty]
             }
         }
+    }
+    
+    public static func hStackSpec (@LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
+        return ASStackLayoutSpec.horizontal(spacing: 10, children)
+    }
+    
+    public static func vStackSpec (@LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
+        return ASStackLayoutSpec.vertical(spacing: 10, children)
     }
     
 }
@@ -202,13 +214,7 @@ extension ASRelativeLayoutSpec {
 
 extension ASLayoutElement {
     
-    public static func hStackSpec (@LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
-        return ASStackLayoutSpec.horizontal(spacing: 10, children)
-    }
     
-    public static func vStackSpec (@LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
-        return ASStackLayoutSpec.vertical(spacing: 10, children)
-    }
     
     public func relativeSpec(horizontalPosition: ASRelativeLayoutSpecPosition = .start, verticalPosition: ASRelativeLayoutSpecPosition = .start, sizingOption: ASRelativeLayoutSpecSizingOption = .minimumSize) -> ASRelativeLayoutSpec {
         ASRelativeLayoutSpec(
@@ -224,12 +230,12 @@ extension ASLayoutElement {
             overlay : overlay())
     }
     
-    @available(*, deprecated, renamed: "insets")
+    @available(*, deprecated, renamed: "insetSpec")
     public func inset(edges: UIEdgeInsets) -> ASLayoutSpec {
         ASInsetLayoutSpec(insets: edges, child: self)
     }
     
-    public func insets(_ edges: UIEdgeInsets) -> ASLayoutSpec {
+    public func insetSpec(_ edges: UIEdgeInsets) -> ASLayoutSpec {
         ASInsetLayoutSpec(insets: edges, child: self)
     }
     
@@ -240,6 +246,11 @@ extension ASLayoutElement {
     public func flex(grow: CGFloat = 1, shrink: CGFloat = 0) -> Self {
         style.flexGrow = grow
         style.flexShrink = shrink
+        return self
+    }
+    
+    @discardableResult public func flexBasis(unit: ASDimensionUnit, value: CGFloat) -> Self {
+        style.flexBasis = .init(unit: unit, value: value)
         return self
     }
     
@@ -305,6 +316,20 @@ extension ASLayoutElement {
             style.maxHeight = .init(unit: .points, value: value)
         }
         
+        return self
+    }
+    
+    /**
+     * sets the height or width of the element
+     */
+    @discardableResult public func fraction(width: CGFloat? = nil, height: CGFloat? = nil) -> Self {
+        if let value = width {
+            style.width = .init(unit: .fraction, value: value)
+        }
+        
+        if let value = height {
+            style.height = .init(unit: .fraction, value: value)
+        }
         return self
     }
 }
