@@ -4816,38 +4816,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		04B791F8ACB6A4AD18ADA666AE17510A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5555FA2ED0654E73D67DB5D3F9683E9D /* ReNode.debug.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/ReNode/ReNode-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ReNode/ReNode-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ReNode/ReNode.modulemap";
-				PRODUCT_MODULE_NAME = ReNode;
-				PRODUCT_NAME = ReNode;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		0E1698570DDA2243D9F388C819366AFA /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6B8719190C97B4653DE962157AF548F1 /* ReSwiftThunk.release.xcconfig */;
@@ -4905,6 +4873,38 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		276B2A2FE3960053EC7809A2FD1AFEF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5555FA2ED0654E73D67DB5D3F9683E9D /* ReNode.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ReNode/ReNode-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ReNode/ReNode-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ReNode/ReNode.modulemap";
+				PRODUCT_MODULE_NAME = ReNode;
+				PRODUCT_NAME = ReNode;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -5450,39 +5450,6 @@
 			};
 			name = Debug;
 		};
-		CEC6C93FFE436F2C7CBB8A0C97561D6D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7447E5ED6EE2A12FAD15AF08057D0EDF /* ReNode.release.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/ReNode/ReNode-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ReNode/ReNode-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ReNode/ReNode.modulemap";
-				PRODUCT_MODULE_NAME = ReNode;
-				PRODUCT_NAME = ReNode;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		D9A5E5E4A2BB07A9F35C3EAAF0901512 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CAA061F5E55B08F230AE35A60F7CBB2E /* ReSwift.debug.xcconfig */;
@@ -5643,6 +5610,39 @@
 			};
 			name = Release;
 		};
+		F7BDF217FA43F6230FC1EC5B6E46269C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7447E5ED6EE2A12FAD15AF08057D0EDF /* ReNode.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ReNode/ReNode-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ReNode/ReNode-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ReNode/ReNode.modulemap";
+				PRODUCT_MODULE_NAME = ReNode;
+				PRODUCT_NAME = ReNode;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -5739,8 +5739,8 @@
 		C2DD37A769A3BADBF7F80F4FF1476CB5 /* Build configuration list for PBXNativeTarget "ReNode" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				04B791F8ACB6A4AD18ADA666AE17510A /* Debug */,
-				CEC6C93FFE436F2C7CBB8A0C97561D6D /* Release */,
+				276B2A2FE3960053EC7809A2FD1AFEF7 /* Debug */,
+				F7BDF217FA43F6230FC1EC5B6E46269C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '11'
-
+  s.swift_version = '5'
   s.source_files = 'ReNode/Classes/**/*.{swift}'
 
   s.dependency "Texture", '~> 3.0.0'
