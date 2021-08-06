@@ -1,5 +1,5 @@
 use_frameworks!
-target 'ReNode_Tests' do
+target 'ReNodeSample' do
   pod 'ReNode', :path => '../'
   
   pod "Texture"

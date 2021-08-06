@@ -18,6 +18,10 @@ open class ReButton : ASButtonNode {
     
     fileprivate var emitTap = PublishSubject<Void>()
     
+    deinit {
+        self.emitTap.dispose()
+    }
+    
     open override func didLoad() {
         super.didLoad()
         self.addTarget(self, action: #selector(onTap), forControlEvents: .touchUpInside)

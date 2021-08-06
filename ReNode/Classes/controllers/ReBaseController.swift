@@ -26,7 +26,7 @@ import ReSwift
         * recommended :
             * perform setup in loadView
  */
-open class ReBaseController<E, T, V>: ASDKViewController<ASDisplayNode>, StoreSubscriber where E : StateType {
+open class ReBaseController<E, T, V>: ASDKViewController<ASDisplayNode>, StoreSubscriber {
 
     ///contains the store state being used be the view controller
     public var store : Store<E>?
@@ -42,11 +42,16 @@ open class ReBaseController<E, T, V>: ASDKViewController<ASDisplayNode>, StoreSu
     
     ///exposed Specific ASDisplay Node passed from V casted from generic ASDisplayNode
     public var reNode : V! {
-        return self.node as! V
+        return self.node as? V
     }
     
     public convenience init(reNode: V) {
         self.init(node: reNode as! ASDisplayNode)
+    }
+    
+    public convenience init(store: Store<E>, seNode: V) {
+        self.init(node: seNode as! ASDisplayNode)
+        self.store = store
     }
     
     open override func viewDidLoad() {
@@ -81,7 +86,7 @@ open class ReBaseController<E, T, V>: ASDKViewController<ASDisplayNode>, StoreSu
     
 }//ReactiveBaseController
 
-open class ReSingleStateController<E, V> : ReBaseController<E,E,V> where E : StateType {
+open class ReSingleStateController<E, V> : ReBaseController<E,E,V> {
     
     ///override this function to listen to state changes
     open override func onStateUpdate(state: E){

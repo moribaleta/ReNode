@@ -1,0 +1,6 @@
+framework module Pods_ReNodeSample {
+  umbrella header "Pods-ReNodeSample-umbrella.h"
+
+  export *
+  module * { export * }
+}

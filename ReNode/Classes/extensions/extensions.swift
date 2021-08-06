@@ -28,8 +28,8 @@ extension UIEdgeInsets {
 
 public extension CGRect {
 
-    public var middle: CGPoint { return .init(x: midX, y: midY) }
+    var middle: CGPoint { return .init(x: midX, y: midY) }
 
-    public var bounds: CGRect  { return .init(origin: .zero, size: size) }
+    var bounds: CGRect  { return .init(origin: .zero, size: size) }
 }
 

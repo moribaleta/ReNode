@@ -14,12 +14,12 @@ PODS:
   - PINRemoteImage/PINCache (3.0.3):
     - PINCache (~> 3.0.3)
     - PINRemoteImage/Core
-  - ReNode (0.1.0):
+  - ReNode (0.1.6):
     - ReSwift
     - ReSwiftThunk
     - RxCocoa (~> 6.2.0)
     - RxSwift (~> 6.2.0)
-    - Texture
+    - Texture (~> 3.0.0)
   - ReSwift (6.1.0)
   - ReSwiftThunk (2.0.1):
     - ReSwift (~> 6.0)
@@ -81,7 +81,7 @@ SPEC CHECKSUMS:
   PINCache: 7a8fc1a691173d21dbddbf86cd515de6efa55086
   PINOperation: 00c935935f1e8cf0d1e2d6b542e75b88fc3e5e20
   PINRemoteImage: f1295b29f8c5e640e25335a1b2bd9d805171bd01
-  ReNode: c28118de5490c0ad20170e4b53fb3560729d2e77
+  ReNode: cfc9112df912e1c00e895b0cb419bd61ca640577
   ReSwift: eab3c01e4279ba81b54a61e4fd6499634d20123a
   ReSwiftThunk: 7ca5145764be6f30b62db88a52d170133954629e
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
@@ -89,6 +89,6 @@ SPEC CHECKSUMS:
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   Texture: 2f109e937850d94d1d07232041c9c7313ccddb81
 
-PODFILE CHECKSUM: 65e92aa63491f9d7bfbdf962784a81cdf9b5ec22
+PODFILE CHECKSUM: 47ca9fbd5aac9103e5be85e53dbcc39c15636f61
 
 COCOAPODS: 1.10.1

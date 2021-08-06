@@ -1,6 +1,6 @@
 {
   "name": "ReNode",
-  "version": "0.1.0",
+  "version": "0.1.6",
   "summary": "A short description of ReNode.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/moribaleta/ReNode.git",
@@ -13,15 +13,15 @@
   },
   "source": {
     "git": "https://github.com/moribaleta/ReNode.git",
-    "tag": "0.1.0"
+    "tag": "0.1.6"
   },
   "platforms": {
     "ios": "11"
   },
-  "source_files": "ReNode/Classes/**/*",
+  "source_files": "ReNode/Classes/**/*.{swift}",
   "dependencies": {
     "Texture": [
-
+      "~> 3.0.0"
     ],
     "ReSwift": [
 
@@ -35,5 +35,8 @@
     "RxCocoa": [
       "~> 6.2.0"
     ]
+  },
+  "xcconfig": {
+    "HEADER_SEARCH_PATHS": "$(FRAMEWORK_SEARCH_PATHS)/ReSwiftThunk.framework/Headers"
   }
 }

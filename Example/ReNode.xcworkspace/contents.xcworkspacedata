@@ -4,6 +4,133 @@
    <FileRef
       location = "group:ReNode.xcodeproj">
    </FileRef>
+   <Group
+      location = "group:../ReNode"
+      name = "ReNode">
+      <Group
+         location = "group:Classes"
+         name = "Classes">
+         <Group
+            location = "group:models"
+            name = "models">
+            <FileRef
+               location = "group:StateProperty.swift">
+            </FileRef>
+            <FileRef
+               location = "group:NavigationStateProtocol.swift">
+            </FileRef>
+            <FileRef
+               location = "group:ProgressiveViewProtocol.swift">
+            </FileRef>
+            <FileRef
+               location = "group:ReEmptyState.swift">
+            </FileRef>
+            <FileRef
+               location = "group:StatePropertyList.swift">
+            </FileRef>
+            <FileRef
+               location = "group:ReProtocol.swift">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:state"
+            name = "state">
+            <FileRef
+               location = "group:StoreStateUtilities.swift">
+            </FileRef>
+            <FileRef
+               location = "group:ReCorpus.swift">
+            </FileRef>
+            <FileRef
+               location = "group:ReState.swift">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:extensions"
+            name = "extensions">
+            <FileRef
+               location = "group:extensions.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Observables.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Relayout.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Editor.swift">
+            </FileRef>
+            <FileRef
+               location = "group:AsyncTaskUtil.swift">
+            </FileRef>
+            <FileRef
+               location = "group:attributedString.swift">
+            </FileRef>
+            <FileRef
+               location = "group:/Users/gabrielmoribaleta/Projects/cocoapods/ReNode/ReNode/Classes/extensions/Common.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Color.swift">
+            </FileRef>
+            <FileRef
+               location = "group:String.swift">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:controllers"
+            name = "controllers">
+            <FileRef
+               location = "group:ReBaseController.swift">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:views"
+            name = "views">
+            <Group
+               location = "group:components"
+               name = "components">
+               <FileRef
+                  location = "group:ReStack.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:ReTable.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:ReCollection.swift">
+               </FileRef>
+            </Group>
+            <Group
+               location = "group:base"
+               name = "base">
+               <FileRef
+                  location = "group:/Users/gabrielmoribaleta/Projects/cocoapods/ReNode/ReNode/Classes/views/base/ReText.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:ReScroll.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:ProgressiveNode.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:ReButton.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:ResizeableNode.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:ErrorDisplayType.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:ReNode.swift">
+               </FileRef>
+            </Group>
+         </Group>
+      </Group>
+      <Group
+         location = "group:Assets"
+         name = "Assets">
+      </Group>
+   </Group>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>

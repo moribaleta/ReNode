@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_ReNode_TestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_ReNode_TestsVersionString[];
+FOUNDATION_EXPORT double Pods_ReNodeSampleVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_ReNodeSampleVersionString[];
 
