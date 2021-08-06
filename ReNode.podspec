@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ReNode'
-  s.version          = '0.1.6'
-  s.summary          = 'A short description of ReNode.'
+  s.version          = '0.1.7'
+  s.summary          = 'A library component with common use for developing swift project.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,8 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+    A common library contains ready made components for fast development
+    combines RxSwift, ReSwift in a single package with components made from AsyncDisplayKit(Texture).
                        DESC
 
   s.homepage         = 'https://github.com/moribaleta/ReNode.git'
@@ -37,6 +38,12 @@ TODO: Add long description of the pod here.
   s.dependency "ReSwiftThunk"
   s.dependency "RxSwift", '~> 6.2.0'
   s.dependency "RxCocoa", '~> 6.2.0'
+
+  s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(FRAMEWORK_SEARCH_PATHS)/Texture.framework/Headers" }
+  s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(FRAMEWORK_SEARCH_PATHS)/ReSwift.framework/Headers" }
+  s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(FRAMEWORK_SEARCH_PATHS)/RxSwift.framework/Headers" }
+  s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(FRAMEWORK_SEARCH_PATHS)/RxCocoa.framework/Headers" }
+  s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(FRAMEWORK_SEARCH_PATHS)/ReSwiftThunk.framework/Headers" }
 
   
   # s.resource_bundles = {
