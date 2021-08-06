@@ -135,3 +135,17 @@ public func SimplifyReducer<T>(_ reducer: @escaping StateReducer<T>) -> ReStateR
         return reducer(action, state as? T)
     }
 }
+
+
+public extension Store {
+    /**
+     * combines the reducer with the main reducer and substate reducer into a single reducer
+     */
+    static func createStoreReducer<T>(main: @escaping Reducer<T>, dict dictReducers: [String: ReStateReducer] = [:]) -> SealedReducer<T> where T: StateType  {
+        let branchReducers              : StateReducer<T> = BranchReducer(funcs: dictReducers)
+        let sealedBranchReducers        = SealReducer(reducer: branchReducers)
+        return ComposeSealedReducer(funcs: main, sealedBranchReducers )
+    }//createStoreReducer
+}
+
+
