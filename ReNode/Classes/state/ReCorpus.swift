@@ -12,7 +12,7 @@ import ReSwiftThunk
 public extension Store {
     
     ///accepts ReCorpus actions
-    func dispatchReThunk<T> (_ action: T) where T : ReCorpus {
+    func dispatchCorpus<T> (_ action: T) where T : ReCorpus {
         self.dispatch(action.bodybuilder())
     }
     
@@ -34,13 +34,15 @@ public protocol ReCorpus : ReCorpusBase {
     
     func body(_ dispatchbody: @escaping DispatchBody) -> Thunk<State>
     func bodybuilder() -> Thunk<State>
-    func execute(dispatch: @escaping DispatchFunction, getState: () -> State?) -> Void
+    func execute(dispatch: @escaping Dispatcher, getState: () -> State?) -> Void
 }
 
 
 public extension ReCorpus {
     
-    typealias DispatchBody = (@escaping  DispatchFunction, () -> State?) -> ()
+    typealias GetState          = () -> State?
+    typealias DispatchBody      = (@escaping  DispatchFunction, GetState) -> ()
+    typealias Dispatcher        = DispatchFunction
     
     var name: String {
         return String(describing: self)

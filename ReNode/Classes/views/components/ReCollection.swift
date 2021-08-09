@@ -29,9 +29,6 @@ open class ReCollection<E> : ASCollectionNode, ReProtocol, ASCollectionDataSourc
     ///for returning the cell node to be used
     open var renderCell : ((E,ASCollectionNode, ReCellProperties) -> ASCellNode)?
     
-    /// render view for section header
-    open var renderHeader : ((Any?, ASTableNode) -> UIView)?
-    
     /// an optional table delegate if you want to use your own function
     public weak var collectionDelegate : ASCollectionDelegate?
     
@@ -269,7 +266,6 @@ open class ReCollection<E> : ASCollectionNode, ReProtocol, ASCollectionDataSourc
         }
         
     }
-    
     
     public var rxScroll     : Observable<CGFloat> {
         return emitOnScroll.asObservable()

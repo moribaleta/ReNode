@@ -20,9 +20,28 @@ class ViewController: ASDKViewController<UIMain> {
         super.viewDidLoad()
         
         let text = ReTextNode("Help me")
+        
+        
     }
 
 
+}
+
+
+
+struct Corpus : ReCorpus  {
+
+    typealias State = MainState
+    
+    func execute(dispatch: @escaping Dispatcher, getState: () -> MainState?) {
+        
+    }
+}
+
+struct MainState : ReState {
+    mutating func clearStateTypes() {
+        
+    }
 }
 
 struct Props {

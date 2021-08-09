@@ -1,6 +1,6 @@
 {
   "name": "ReNode",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "summary": "A library component with common use for developing swift project.",
   "description": "A common library contains ready made components for fast development\ncombines RxSwift, ReSwift in a single package with components made from AsyncDisplayKit(Texture).",
   "homepage": "https://github.com/moribaleta/ReNode.git",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/moribaleta/ReNode.git",
-    "tag": "0.1.7"
+    "tag": "0.1.8"
   },
   "platforms": {
     "ios": "11"

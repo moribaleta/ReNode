@@ -267,8 +267,8 @@ public extension UIFont {
     
     func italize(_ isItalize: Bool) -> UIFont {
         isItalize ?
-            self :
-            UIFont.italicSystemFont(ofSize: self.pointSize)
+            UIFont.italicSystemFont(ofSize: self.pointSize):
+            self
     }
     
 }
