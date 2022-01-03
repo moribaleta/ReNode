@@ -59,12 +59,11 @@ open class ProgressiveNode : ResizeableNode, ProgressiveViewProtocol{
     }
 }
 
-
 /**
 reactive node implementation of the ProgressiveViewProtocol doesnt load the view unless it is viewed from the screen
 - used for uiview with complex ui components
 */
-open class ReProgressiveNode<T> : ReNode<T>, ProgressiveViewProtocol {
+open class ReProgressiveNode<T> : ReactiveNode<T>, ProgressiveViewProtocol {
     public var isViewed: Bool = false
     
     public var loader: ASDisplayNode? = ASDisplayNode()

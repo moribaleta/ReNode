@@ -41,12 +41,12 @@ open class ReBaseController<E, T, V>: ASDKViewController<ASDisplayNode>, StoreSu
     public var cache : T?
     
     ///exposed Specific ASDisplay Node passed from V casted from generic ASDisplayNode
-    public var reNode : V! {
+    public var ReactiveNode : V! {
         return self.node as? V
     }
     
-    public convenience init(reNode: V) {
-        self.init(node: reNode as! ASDisplayNode)
+    public convenience init(ReactiveNode: V) {
+        self.init(node: ReactiveNode as! ASDisplayNode)
     }
     
     public convenience init(store: Store<E>, seNode: V) {
@@ -56,7 +56,7 @@ open class ReBaseController<E, T, V>: ASDKViewController<ASDisplayNode>, StoreSu
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        (self.node as? ReNode<T>)?.reactiveBind(obx: self.statePublisher)
+        (self.node as? ReactiveNode<T>)?.reactiveBind(obx: self.statePublisher)
         store?.subscribe(self)
     }
     

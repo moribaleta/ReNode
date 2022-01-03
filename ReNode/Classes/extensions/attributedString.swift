@@ -1,6 +1,6 @@
 //
 //  attributedString.swift
-//  ReNodeSample
+//  ReactiveNodeSample
 //
 //  Created by Gabriel Mori Baleta on 8/6/21.
 //  Copyright © 2021 CocoaPods. All rights reserved.

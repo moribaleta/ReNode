@@ -14,7 +14,7 @@ import RxSwift
 /**
  ui component for displaying a list of display in a vertical stackview
  */
-open class ReStack<E> : ReNode<StatePropertyList<E>>, ReEmptyState {
+open class ReStack<E> : ReactiveNode<StatePropertyList<E>>, ReEmptyState {
     
     public typealias StateList = StatePropertyList<E>
     

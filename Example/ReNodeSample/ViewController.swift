@@ -49,7 +49,7 @@ struct Props {
 }
 
 
-class UIMain : ReNode<Props>{
+class UIMain : ReactiveNode<Props>{
     
     override init() {
         super.init()

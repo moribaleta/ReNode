@@ -22,9 +22,7 @@ public protocol ReTableItem: AnyObject {
  ATTENTION:
  * if you are using a single list use singleListBind() use sectionListBind() on multiple section
  */
-open class ReTable<E> : ASTableNode, ReProtocol, ASTableDataSource, ASTableDelegate, ReScrollNodeType {
-    
-    
+open class ReTable<E> : ASTableNode, ASTableDataSource, ASTableDelegate, ReScrollNodeType {
     
     public var automaticallyDisableScrollOnContentSize: Bool = true
     
@@ -60,6 +58,12 @@ open class ReTable<E> : ASTableNode, ReProtocol, ASTableDataSource, ASTableDeleg
     
     open var canMove        : ((IndexPath) -> Bool) = { (indexPath: IndexPath) -> Bool in return true }
     
+    open var rxDidMove      : Observable<(prev: IndexPath, new: IndexPath)> {
+        return self.emitDidMove.asObservable()
+    }
+    
+    private var emitDidMove = PublishSubject<(prev: IndexPath, new: IndexPath)>()
+    
     public var automaticallyHideEmptySection = false
     
     /// an optional table delegate if you want to use your own function
@@ -79,6 +83,28 @@ open class ReTable<E> : ASTableNode, ReProtocol, ASTableDataSource, ASTableDeleg
     
     public var disposeBag               = DisposeBag()
     
+    /*public var refreshControl           = UIRefreshControl()
+    
+    /**
+     * obs for subscribing to refresh control changes
+     */
+    public var rxOnRefresh  : Observable<Void> {
+        self.refreshControl.rx.controlEvent(.valueChanged).asObservable()
+    }
+    
+    /**
+     * used to determine if refresh control is enabled
+     * disables automaticallyDisableScrollOnContentSize if enabled
+     */
+    public var refreshControlEnabled   : Bool = false {
+        didSet{
+            self.view.refreshControl?.isEnabled             = self.refreshControlEnabled
+            self.automaticallyDisableScrollOnContentSize    = self.refreshControlEnabled ?
+                                                                false : self.automaticallyDisableScrollOnContentSize
+        }
+    }*/
+    
+    
     
     public var debug = ""
     
@@ -97,7 +123,7 @@ open class ReTable<E> : ASTableNode, ReProtocol, ASTableDataSource, ASTableDeleg
         self.leadingScreensForBatching = 0.2
         
         self.emitContentChanges
-            .debounce(.milliseconds(5), scheduler: MainScheduler.asyncInstance)
+            .debounce(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
             .subscribe(onNext: {
                 [weak self] in
                 self?.onContentChanges()
@@ -105,14 +131,29 @@ open class ReTable<E> : ASTableNode, ReProtocol, ASTableDataSource, ASTableDeleg
         
         
         self.emitContentChanges.onNext(())
+        
+        //self.view.refreshControl = self.refreshControl
     }
+    
+    /**
+     * sets the refresh control to start or end refreshing
+     */
+//    public func setRefreshing(_ isRefreshing : Bool) {
+//        isRefreshing ?
+//            self.refreshControl.beginRefreshing() :
+//            self.refreshControl.endRefreshing()
+//    }
     
     ///passes a single stateproperty list then maps it to a stateproperty list of sections to the table
     public func singleListBind(simple: Observable<StatePropertyList<E>>) {
         let obx = simple.map { simpleList -> StateList in
             let data = StateList([simpleList])
-            data.isDirty = false
-            data.appendChange(type: .change, index: 0, value: simpleList)
+            if simpleList.isEmpty {
+                data.isDirty = true
+            } else {
+                data.isDirty = false
+                data.appendChange(type: .change, index: 0, value: simpleList)
+            }
             return data
         }
         
@@ -377,6 +418,7 @@ open class ReTable<E> : ASTableNode, ReProtocol, ASTableDataSource, ASTableDeleg
         
         tablelist?.list[sourceIndexPath.section].list.remove(at: sourceIndexPath.row)
         tablelist?.list[sourceIndexPath.section].list.insert(element, at: destinationIndexPath.row)
+        self.emitDidMove.onNext((sourceIndexPath, destinationIndexPath))
     }
     
     public var rxScroll     : Observable<CGFloat> {
@@ -414,26 +456,6 @@ open class ReTable<E> : ASTableNode, ReProtocol, ASTableDataSource, ASTableDeleg
             }
         }
     }
-    
-    /*
-     func onDidScroll(point: CGPoint){
-     self.lastContentOffset = point.y
-     if scrollEmitEnabled {
-     self.emitOnScroll.onNext(lastContentOffset)
-     }
-     
-     if isBatchEnable ? self.shouldTableBatchFetch?(self) ?? false : false {
-     let offsetY = point.y + 50
-     let contentHeight = self.view.contentSize.height
-     
-     if offsetY > contentHeight - self.view.frame.size.height {
-     if !(self.loading?(self) ?? false) {
-     self.emitReachEnd.onNext(())
-     }
-     }
-     }
-     }
-     */
     
     
     
@@ -479,7 +501,7 @@ open class ReSingleTableUtilities {
     public class func DefaultHeader(item: Any?, table: ASTableNode) -> UIView {
         if let item = item as? String {
             let label = UILabel()
-            label.attributedText = NSAttributedString(string: item)
+            label.attributedText = Common.attributedString(item, attribute: .sublabel) //NSAttributedString(asLabel: item)
             label.backgroundColor = .white
             return label
         }

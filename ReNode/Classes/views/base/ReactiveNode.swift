@@ -1,5 +1,5 @@
 //
-//  ReNode.swift
+//  ReactiveNode.swift
 //  restate_Tests
 //
 //  Created by Gabriel Mori Baleta on 7/28/21.
@@ -18,7 +18,7 @@ import RxSwift
     - extend this class
     - T : state / object to bind to the ui
  */
-open class ReNode<T> : ResizeableNode {
+open class ReactiveNode<T> : ResizeableNode {
     
     /// disposebag for current node
     public var disposeBag       = DisposeBag()

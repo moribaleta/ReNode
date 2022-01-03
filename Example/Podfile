@@ -7,4 +7,6 @@ target 'ReNodeSample' do
   pod 'ReSwiftThunk'
   pod 'RxSwift', '6.2.0'
   pod 'RxCocoa', '6.2.0'
+  pod 'StorybookKit'
+  
 end

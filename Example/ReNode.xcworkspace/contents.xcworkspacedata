@@ -75,6 +75,12 @@
             <FileRef
                location = "group:String.swift">
             </FileRef>
+            <FileRef
+               location = "group:ReTextBuilder.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Sequence.swift">
+            </FileRef>
          </Group>
          <Group
             location = "group:controllers"
@@ -115,13 +121,19 @@
                   location = "group:ReButton.swift">
                </FileRef>
                <FileRef
+                  location = "group:/Users/gabrielmoribaleta/Projects/cocoapods/ReNode/ReNode/Classes/views/base/ReactiveNode.swift">
+               </FileRef>
+               <FileRef
                   location = "group:ResizeableNode.swift">
                </FileRef>
                <FileRef
                   location = "group:ErrorDisplayType.swift">
                </FileRef>
                <FileRef
-                  location = "group:ReNode.swift">
+                  location = "group:ReactiveProtocol.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:ReCellNode.swift">
                </FileRef>
             </Group>
          </Group>

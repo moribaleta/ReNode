@@ -10,6 +10,7 @@ import AsyncDisplayKit
 
 public enum ReTextType {
     
+    
     ///displayText: size: 24 weight: .medium color_ref: .header_title
     case displayText
     ///.title: size: 21 weight: .medium color_ref: .header_title
@@ -45,6 +46,7 @@ public enum ReTextType {
     ///placeholder  size: 15 weight: .regular isItalic: italic color_ref:   .label
     case placeholder
     
+    case custom(size: CGFloat, fontWeight: UIFont.Weight, isItalic: Bool, color: Common.color)
     
     public var size : CGFloat {
         switch self {
@@ -83,6 +85,8 @@ public enum ReTextType {
         case .placeholder:
             //return 12
             return 15
+        case .custom(let size,_,_,_):
+            return size
         }
     }
     
@@ -122,11 +126,20 @@ public enum ReTextType {
             return .regular
         case .placeholder:
             return .regular
+        case .custom(_, let fontWeight, _,_):
+            return fontWeight
         }
     }
     
     public var isItalic : Bool {
-        return self == .placeholder
+        switch self {
+        case .placeholder:
+            return true
+        case .custom(_,_,let isItalic,_):
+            return isItalic
+        default:
+            return false
+        }
     }
     
     public var color : Common.color {
@@ -165,6 +178,8 @@ public enum ReTextType {
             return .label
         case .placeholder:
             return .label
+        case .custom(_,_,_, let color):
+            return color
         }
     }
 }
@@ -204,6 +219,15 @@ open class ReTextNode : ASTextNode {
                      isItalic   : isItalic,
                      isRequired : isRequired)
     }
+    
+    /**
+     * used for constructing complex string attribute using TextBuilder
+     */
+    /*public convenience init(@ReTextBuilder attributes: () -> NSAttributedString) {
+        self.init()
+        self.text           = attributes().string
+        self.attributedText = attributes()
+    }*/
     
     public func setText(_ text: String, attribute : ReTextType = .bodyText, size: CGFloat? = nil, fontWeight: UIFont.Weight? = nil, color: UIColor? = nil, highlight: String? = nil,  isItalic: Bool? = nil,  isRequired: Bool = false) {
         self.text = text
