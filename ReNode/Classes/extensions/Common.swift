@@ -160,64 +160,94 @@ public class Common {
          UIColor(#212121)
          ~~~
          */
+        case white          = "#FFFFFF"
+        
         case black          = "#212121"
+        
         ///"#7D7D7D"
         case gray           = "#7D7D7D"
+        
         ///"#ECECEC"
         case disabled       = "#ECECEC"
+        
         ///"#0090F5"
         case blue           = "#0090F5"
+        
         ///"#FF4B54"
         case red            = "#FF4B54"
+        
         ///"#FFC53A"
         case yellow         = "#FFC53A"
+        
         ///"#FF653A"
         case orange         = "#FF653A"
+        
         ///"#4137AE"
         case violet         = "#4137AE"
+        
         ///"#00C088"
         case green          = "#00C088"
+        
         ///"#00D67F"
         case lightgreen     = "#00D67F"
+        
         ///"#DB1259"
         case pink           = "#DB1259"
+        
         ///"#7E2DA0"
         case lightviolet    = "#7E2DA0"
+        
         ///"#00C3F9"
         case lightblue      = "#00C3F9"
+        
         ///"#FF9C3A"
         case lightorange    = "#FF9C3A"
+        
         ///"#95C72C"
         case mossgreen      = "#95C72C"
+        
         ///"#00CAAF"
         case persiangreen   = "#00CAAF"
         
         ///"#E1E1E1"
         case lightgray      = "#E1E1E1"
+        
         ///"#D3D3D3"
         case mediumgray     = "#D3D3D3"
+        
         ///"#BCBCBC"
         case darkgray       = "#BCBCBC"
+        
         ///"#62F8D1"
         case mint           = "#62F8D1"
+        
         ///"#8EE9FF"
         case skyblue        = "#8EE9FF"
+        
         ///"#AOC80B"
         case babyblue       = "#AOC80B"
+        
         ///"#BDB1E4"
         case lavender       = "#BDB1E4"
+        
         ///"#D8AFE2"
         case lilac          = "#D8AFE2"
+        
         ///"#FFB5A7"
         case salmon         = "#FFB5A7"
+        
         ///"#FFCE5E"
         case dandelion      = "#FFCE5E"
+        
         ///"#FFED54"
         case lemon          = "#FFED54"
+        
         ///"#A6FF64"
         case neonGreen      = "#A6FF64"
+        
         ///"#74F393"
         case spring         = "#74F393"
+        
         ///"#ABDF77"
         case pear           = "#ABDF77"
         
