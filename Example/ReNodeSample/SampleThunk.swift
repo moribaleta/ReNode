@@ -9,7 +9,7 @@
 import Foundation
 import ReNode
 
-struct SampleCorpusStore : ReCorpus  {
+struct SampleThunk : ReCorpus  {
 
     typealias State = SampleState
     

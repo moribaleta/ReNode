@@ -25,6 +25,9 @@ class SampleView : ReactiveNode<SampleState> {
         scroll.layoutSpecBlock = { node, size -> ASLayoutSpec in
             return ASStackLayoutSpec.vStackSpec {
                 
+                
+                // TEXT
+                
                 ReTextNode("Display \(ReTextType.displayText.size)", attribute: .displayText)
                 
                 ReTextNode("title \(ReTextType.title.size)", attribute: .title)
@@ -58,7 +61,6 @@ class SampleView : ReactiveNode<SampleState> {
                 ReTextNode("titleLabel \(ReTextType.titleLabel.size)", attribute: .titleLabel)
 
                 ReTextNode("placeholder \(ReTextType.placeholder.size)", attribute: .placeholder)
-                
                 
             }
         }
