@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D74C98B278360BF0099C24B /* SampleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74C98A278360BF0099C24B /* SampleController.swift */; };
+		3D74C98D278361970099C24B /* SampleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74C98C278361970099C24B /* SampleState.swift */; };
+		3D74C98F2784B9840099C24B /* SampleStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74C98E2784B9840099C24B /* SampleStore.swift */; };
+		3D74C9912784BA150099C24B /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74C9902784BA150099C24B /* SampleView.swift */; };
 		A3F5E0FE26BCB59B000BF21B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F5E0FD26BCB59B000BF21B /* AppDelegate.swift */; };
 		A3F5E10026BCB59B000BF21B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F5E0FF26BCB59B000BF21B /* SceneDelegate.swift */; };
 		A3F5E10226BCB59B000BF21B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F5E10126BCB59B000BF21B /* ViewController.swift */; };
@@ -19,6 +23,10 @@
 /* Begin PBXFileReference section */
 		27B59BDDD84AC51A6B05709D /* Pods_ReNodeSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReNodeSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E6991214A0E436990660E78 /* ReNode.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ReNode.podspec; path = ../ReNode.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		3D74C98A278360BF0099C24B /* SampleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleController.swift; sourceTree = "<group>"; };
+		3D74C98C278361970099C24B /* SampleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleState.swift; sourceTree = "<group>"; };
+		3D74C98E2784B9840099C24B /* SampleStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleStore.swift; sourceTree = "<group>"; };
+		3D74C9902784BA150099C24B /* SampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
 		3FDB695CBD9943FEE301079D /* Pods-ReNode_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReNode_Tests.debug.xcconfig"; path = "Target Support Files/Pods-ReNode_Tests/Pods-ReNode_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		56D807F2E8B30720AA597C1D /* Pods-ReNodeSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReNodeSample.debug.xcconfig"; path = "Target Support Files/Pods-ReNodeSample/Pods-ReNodeSample.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -149,6 +157,10 @@
 				A3F5E10B26BCB59C000BF21B /* LaunchScreen.storyboard */,
 				A3F5E10E26BCB59C000BF21B /* Info.plist */,
 				A3F5E10626BCB59B000BF21B /* ReNodeSample.xcdatamodeld */,
+				3D74C98A278360BF0099C24B /* SampleController.swift */,
+				3D74C9902784BA150099C24B /* SampleView.swift */,
+				3D74C98C278361970099C24B /* SampleState.swift */,
+				3D74C98E2784B9840099C24B /* SampleStore.swift */,
 			);
 			path = ReNodeSample;
 			sourceTree = "<group>";
@@ -290,10 +302,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D74C9912784BA150099C24B /* SampleView.swift in Sources */,
 				A3F5E10826BCB59B000BF21B /* ReNodeSample.xcdatamodeld in Sources */,
+				3D74C98D278361970099C24B /* SampleState.swift in Sources */,
+				3D74C98F2784B9840099C24B /* SampleStore.swift in Sources */,
 				A3F5E10226BCB59B000BF21B /* ViewController.swift in Sources */,
 				A3F5E0FE26BCB59B000BF21B /* AppDelegate.swift in Sources */,
 				A3F5E10026BCB59B000BF21B /* SceneDelegate.swift in Sources */,
+				3D74C98B278360BF0099C24B /* SampleController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
