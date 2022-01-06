@@ -9,24 +9,51 @@
 import Foundation
 import AsyncDisplayKit
 import RxSwift
-import AVFoundation
+import UIKit
 
-open class ReButton : ASButtonNode {
+
+open class  ReButton : ASButtonNode {
+    
+    let node_icon   = ASTextNode()
+
+    let node_text   = ASTextNode()
+
+    var config : ButtonConfig = .DARK
+    
+    fileprivate var emitTap = PublishSubject<Void>()
     
     public var rxTap : Observable<Void> {
         self.emitTap.asObservable()
     }
     
-    fileprivate var emitTap = PublishSubject<Void>()
+    open override var isHighlighted: Bool {
+        didSet {
+            if isHighlighted {
+                self.alpha = 0.5
+//                if let config = buttonConfig {
+//                    self.backgroundColor = config.highlightColor
+//                }
+            } else {
+                self.alpha = 1.0
+//                if let config = buttonConfig {
+//                    self.backgroundColor = config.backgroundColor
+//                }
+            }
+        }
+    }
+    
+    
     
     deinit {
         self.emitTap.dispose()
     }
     
+    
+    
     open override func didLoad() {
         super.didLoad()
         
-        self.addTarget(self, action: #selector(onTap), forControlEvents: .touchUpInside)
+        addTarget(self, action: #selector(onTap), forControlEvents: .touchUpInside)
     }
     
     @objc private func onTap(sender: Any) {
@@ -35,14 +62,19 @@ open class ReButton : ASButtonNode {
     
     public func set(icon: String, text: String, config: ButtonConfig) {
         
+        self.config = config
         
-        let font = UIFont.systemFont(ofSize: config.fontSize, weight: .medium)
-        self.setTitle(text, with: font, with: config.fontColor, for: .normal)
+        let iconSize : CGFloat = config.shape == .icon36 ? 18 : 15
+        let iconFont : UIFont = UIFont.icon(from: Fonts.SeriousMD, ofSize: iconSize)
+        node_icon.attributedText = NSAttributedString.init(string: icon, attributes: [NSAttributedString.Key.font : iconFont, NSAttributedString.Key.foregroundColor : config.fontColor ])
+ 
+        let font = UIFont.systemFont(ofSize: config.fontSize, weight: .semibold)
+        node_text.attributedText = NSAttributedString.init(string: text, attributes: [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : config.fontColor])
+        
         
         self.backgroundColor = config.backgroundColor
         self.borderColor = config.borderColor?.cgColor ?? UIColor.clear.cgColor
         self.borderWidth = 1
-        
         
         
         switch config.shape {
@@ -70,12 +102,40 @@ open class ReButton : ASButtonNode {
        
     }
     
-//    /// set string without chaing button style
-//    public func setText(text: String) {
-//
-//    }
     
+    public override func    layoutSpecThatFits  (_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+
+        let inside = ASStackLayoutSpec.hStackSpec {
+                if (node_icon.attributedText?.string.count ?? 0) > 0 {
+                    node_icon
+                }
+                if (node_text.attributedText?.string.count ?? 0) > 0 {
+                    node_text
+                }
+            }
+            .spacing(5)
+            .align(.center)
+            
+        let inset : UIEdgeInsets = {
+            switch self.config.shape {
+            case .round, .rect:
+                return .init(horizontal: 20, vertical: 0)
+            default:
+                return .zero
+            }
+        }()
+        
+        let insetSpec = ASInsetLayoutSpec(insets: inset, child: inside)
+        
+        return ASCenterLayoutSpec(centeringOptions: .XY,
+                                  sizingOptions: .minimumXY,
+                                  child: insetSpec)
+        
+        
+    }
+
 }
+
 
 
 public enum ButtonShape {
@@ -93,6 +153,7 @@ public struct ButtonConfig {
     public var fontColor : UIColor
     public var backgroundColor : UIColor
     public var borderColor : UIColor? // if nil, just follow background color
+    
     
     public init (shape: ButtonShape, fontSize: CGFloat, fontColor: UIColor, backgroundColor: UIColor, borderColor: UIColor?) {
         
@@ -130,4 +191,22 @@ public struct ButtonConfig {
     
     public static var ROUND_BLUE : ButtonConfig = .init(shape: .round, fontSize: 15, fontColor: Common.baseColor.blue.uicolor, backgroundColor: Common.baseColor.white.uicolor, borderColor: Common.baseColor.lightgray.uicolor)
     
+    
+    
+    // ICON
+    public static var ICON30_CLEAR : ButtonConfig = .init(shape: .icon30, fontSize: 15, fontColor: Common.baseColor.black.uicolor, backgroundColor: .clear, borderColor: .clear)
+    
+    public static var ICON30_GRAY : ButtonConfig = .init(shape: .icon30, fontSize: 15, fontColor: Common.baseColor.black.uicolor, backgroundColor: Common.baseColor.lightgray.uicolor, borderColor: .clear)
+    
+    public static var ICON36_GRAY : ButtonConfig = .init(shape: .icon36, fontSize: 15, fontColor: Common.baseColor.black.uicolor, backgroundColor: Common.baseColor.lightgray.uicolor, borderColor: .clear)
+    
+    public static var ICON36_BLACK : ButtonConfig = .init(shape: .icon36, fontSize: 15, fontColor: Common.baseColor.white.uicolor, backgroundColor: Common.baseColor.black.uicolor, borderColor: .clear)
+    
 }
+
+
+
+
+
+
+

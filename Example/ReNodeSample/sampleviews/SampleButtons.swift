@@ -22,6 +22,15 @@ class SampleButtons : ASDisplayNode {
     
     var button_blue = ReButton()
     
+    
+    var icon30_clear = ReButton()
+    var icon30_gray = ReButton()
+    var icon36_gray = ReButton()
+    var icon36_black = ReButton()
+    
+    
+    var icontext = ReButton()
+    
     override init() {
         super.init()
         automaticallyManagesSubnodes = true
@@ -36,6 +45,14 @@ class SampleButtons : ASDisplayNode {
         button_light    .set(icon: "", text: "LIGHT"    , config: .LIGHT    )
         
         button_blue     .set(icon: "", text: "Round Blue", config: .ROUND_BLUE)
+        
+        icon30_clear    .set(icon: Icon.actionAdd.rawValue, text: "", config: .ICON30_CLEAR)
+        icon30_gray     .set(icon: Icon.actionAdd.rawValue, text: "", config: .ICON30_GRAY)
+        icon36_gray     .set(icon: Icon.actionAdd.rawValue, text: "", config: .ICON36_GRAY)
+        icon36_black    .set(icon: Icon.actionAdd.rawValue, text: "", config: .ICON36_BLACK)
+        
+        icontext        .set(icon: Icon.actionAdd.rawValue, text: "ADD", config: .DARK)
+        
     }
     
     override func didLoad() {
@@ -52,6 +69,11 @@ class SampleButtons : ASDisplayNode {
             button_violet
             button_light
             button_blue
+            icon30_clear
+            icon30_gray
+            icon36_gray
+            icon36_black
+            icontext
         }
     }
 }
