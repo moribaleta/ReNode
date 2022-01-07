@@ -10,10 +10,20 @@ import Foundation
 import ReNode
 import AsyncDisplayKit
 
+
+class VCSampleTexts : ASDKViewController<SampleTexts> {
+    static func spawn() -> VCSampleTexts {
+        return tell( VCSampleTexts.init(node: .init()) ) {
+            $0.title = "Texts"
+        }
+    }
+}
+
 class SampleTexts : ASDisplayNode {
     override init() {
         super.init()
         automaticallyManagesSubnodes = true
+        backgroundColor = .white
     }
     
     override func didLoad() {
@@ -60,5 +70,11 @@ class SampleTexts : ASDisplayNode {
             
             
         }
+        .insetSpec(self.safeAreaInsets)
+        .insetSpec(.init(horizontal: 20, vertical: 10))
+    }
+    
+    override func safeAreaInsetsDidChange() {
+        setNeedsLayout()
     }
 }

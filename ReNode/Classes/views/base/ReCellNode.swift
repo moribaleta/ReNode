@@ -21,3 +21,9 @@ open class ReCellNode : ASCellNode {
     }
     
 }
+
+
+public class ReTextCellNode : ASTextCellNode {
+    
+}
+

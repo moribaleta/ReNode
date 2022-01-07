@@ -18,4 +18,8 @@ public extension UIFont {
         }
         return UIFont(name: fontName, size: size)!
     }
+    
+    static func font(_ font: Fonts, ofSize size: CGFloat) -> UIFont {
+        return UIFont(name: font.rawValue, size: size)!
+    }
 }

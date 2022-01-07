@@ -8,6 +8,7 @@
 
 import Foundation
 import ReNode
+import RxSwift
 
 class SampleController : ReBaseController<SampleState, SampleState, SampleView> {
     
@@ -17,5 +18,25 @@ class SampleController : ReBaseController<SampleState, SampleState, SampleView> 
         return vc
     }
     
+    var disposeBag = DisposeBag()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "ReNode Sample"
+        
+        ReactiveNode.table.rxSelect
+            .subscribe(onNext: { selected in
+                let vc : UIViewController = {
+                    switch selected.indexPath.item {
+                    case 0:  return VCSampleTexts.spawn()
+                    case 1:  return VCSampleButtons.spawn()
+                    default: return UIViewController()
+                    }
+                }()
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            }).disposed(by: disposeBag)
+        
+    }
 }
-

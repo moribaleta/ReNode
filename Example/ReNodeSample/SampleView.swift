@@ -17,32 +17,28 @@ class SampleView : ReactiveNode<SampleState> {
     var texts = SampleTexts()
     var buttons = SampleButtons()
     
+    var table = ReTable<String>()
+    var list = ["Text", "Button", "Textfield", "Dropdown/Datedown", "Checkbox/Radio/SegmentControl", "Modal" ]
+    
     override init() {
         super.init()
         
         automaticallyManagesSubnodes = true
         
-        scroll.automaticallyManagesSubnodes = true
-        scroll.automaticallyManagesContentSize = true
-        
-        scroll.layoutSpecBlock = { [unowned self] node, size -> ASLayoutSpec in
-            
-            ASStackLayoutSpec.vStackSpec {
-                self.texts
-                self.buttons
-            }
+        table.singleListBind(simple: .just(.init(list)))
+        table.renderCell = { element, table, props -> ASCellNode in
+            let cell = ASTextCellNode.init(attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15)], insets: .init(horizontal: 16, vertical: 16))
+            cell.text = element
+            return cell
         }
     }
     
     override func didLoad() {
         super.didLoad()
         
-        backgroundColor = .white
-        scroll.backgroundColor = .white
-        
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        return ASInsetLayoutSpec.init(insets: .zero, child: scroll)
+        return ASInsetLayoutSpec.init(insets: .zero, child: table)
     }
 }

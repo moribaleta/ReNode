@@ -10,6 +10,15 @@ import Foundation
 import AsyncDisplayKit
 import ReNode
 
+
+class VCSampleButtons : ASDKViewController<SampleButtons> {
+    static func spawn() -> VCSampleButtons {
+        return tell( VCSampleButtons.init(node: .init()) ) {
+            $0.title = "Buttons"
+        }
+    }
+}
+
 class SampleButtons : ASDisplayNode {
     
     var button_link = ReButton()
@@ -34,7 +43,7 @@ class SampleButtons : ASDisplayNode {
     override init() {
         super.init()
         automaticallyManagesSubnodes = true
-        
+        backgroundColor = .white
         
         button_link     .set(icon: "", text: "Link"     , config: .LINK     )
         
@@ -75,5 +84,11 @@ class SampleButtons : ASDisplayNode {
             icon36_black
             icontext
         }
+        .insetSpec(self.safeAreaInsets)
+        .insetSpec(.init(horizontal: 20, vertical: 10))
+    }
+    
+    override func safeAreaInsetsDidChange() {
+        setNeedsLayout()
     }
 }
