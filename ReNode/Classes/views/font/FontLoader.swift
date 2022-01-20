@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import CoreText
+import AVFoundation
 
 
 public enum Fonts: String {
@@ -16,39 +17,59 @@ public enum Fonts: String {
 }
 
 class FontLoader: NSObject {
-    class func loadFont(_ fontName: String) {
+    
+    static var loaded = false
+    
+    class func loadFont() {
+        
+        if loaded {
+            return
+        }
+        loaded = true
+        
+        
         let bundle = Bundle(for: FontLoader.self)
         let paths = bundle.paths(forResourcesOfType: "ttf", inDirectory: nil)
-        var fontURL: NSURL?
-        var error: Unmanaged<CFError>?
-
-        paths.forEach {
-            guard let filename = NSURL(fileURLWithPath: $0).lastPathComponent,
-                filename.lowercased().range(of: fontName.lowercased()) != nil else {
-                    return
-            }
-
-            fontURL = NSURL(fileURLWithPath: $0)
+        
+        paths.forEach { path in
+            let filename = NSURL(fileURLWithPath: path).lastPathComponent
+            UIFont.registerFont(withFilenameString: filename!, bundle: bundle)
         }
 
-        guard let fontURL = fontURL else {
-                return
-        }
+    }
+    
+}
 
-        guard
-            !CTFontManagerRegisterFontsForURL(fontURL, .process, &error),
-            let unwrappedError = error,
-            let nsError = (unwrappedError.takeUnretainedValue() as AnyObject) as? NSError else {
+public extension UIFont {
 
+    public static func registerFont(withFilenameString filenameString: String, bundle: Bundle) {
+        print("smd_registerFont \(filenameString)")
+        guard let pathForResourceString = bundle.path(forResource: filenameString, ofType: nil) else {
+            print("UIFont+:  Failed to register font - path for resource not found.")
             return
         }
 
-        let errorDescription: CFString = CFErrorCopyDescription(unwrappedError.takeUnretainedValue())
+        guard let fontData = NSData(contentsOfFile: pathForResourceString) else {
+            print("UIFont+:  Failed to register font - font data could not be loaded.")
+            return
+        }
 
-        NSException(name: NSExceptionName.internalInconsistencyException,
-                    reason: errorDescription as String,
-                    userInfo: [NSUnderlyingErrorKey: nsError]).raise()
+        guard let dataProvider = CGDataProvider(data: fontData) else {
+            print("UIFont+:  Failed to register font - data provider could not be loaded.")
+            return
+        }
+
+        guard let font = CGFont(dataProvider) else {
+            print("UIFont+:  Failed to register font - font could not be loaded.")
+            return
+        }
+
+        var errorRef: Unmanaged<CFError>? = nil
+        if (CTFontManagerRegisterGraphicsFont(font, &errorRef) == false) {
+            print("UIFont+:  Failed to register font - register graphics font failed - this font may have already been registered in the main bundle.")
+        }
     }
+
 }
 
 

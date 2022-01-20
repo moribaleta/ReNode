@@ -14,7 +14,7 @@ public extension UIFont {
         let fontNames = UIFont.fontNames(forFamilyName: font.rawValue)
         if !fontNames.contains(fontName)
         {
-            FontLoader.loadFont(fontName)
+            FontLoader.loadFont()
         }
         return UIFont(name: fontName, size: size)!
     }

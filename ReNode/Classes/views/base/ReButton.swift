@@ -69,6 +69,7 @@ open class  ReButton : ASButtonNode {
         node_icon.attributedText = NSAttributedString.init(string: icon, attributes: [NSAttributedString.Key.font : iconFont, NSAttributedString.Key.foregroundColor : config.fontColor ])
  
         let font = UIFont.systemFont(ofSize: config.fontSize, weight: .semibold)
+        //let font = UIFont.icon(from: .Roboto, ofSize: config.fontSize)
         node_text.attributedText = NSAttributedString.init(string: text, attributes: [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : config.fontColor])
         
         
@@ -148,12 +149,15 @@ public enum ButtonShape {
 
 public struct ButtonConfig {
     
-    public var shape : ButtonShape
-    public var fontSize : CGFloat
-    public var fontColor : UIColor
-    public var backgroundColor : UIColor
-    public var borderColor : UIColor? // if nil, just follow background color
+    public var shape            : ButtonShape
+    public var fontSize         : CGFloat
+    public var fontColor        : UIColor
+    public var backgroundColor  : UIColor
+    public var borderColor      : UIColor? // if nil, just follow background color
     
+    public var toggledFontColor         : UIColor?
+    public var toggledUnderlineColor    : UIColor?
+    public var toggledBackgroundColor   : UIColor?
     
     public init (shape: ButtonShape, fontSize: CGFloat, fontColor: UIColor, backgroundColor: UIColor, borderColor: UIColor?) {
         

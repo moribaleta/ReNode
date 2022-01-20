@@ -3,4 +3,86 @@
    uuid = "8E858FD1-F5A1-4615-9023-EF7C7424B1C3"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "10DCB3FD-EECE-408F-8499-2CAD398F0278"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ReNode/Classes/views/font/UIFont.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "icon(from:ofSize:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5F316F2B-59DA-4084-B5B6-FA3CB8A8A4DF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ReNode/Classes/views/font/FontLoader.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "loadFont()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5F316F2B-59DA-4084-B5B6-FA3CB8A8A4DF - 54c2347e9980df64"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static ReNode.FontLoader.loadFont(Swift.String) -&gt; ()"
+                  moduleName = "ReNode"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mini/Documents/seriousmd-renode/ReNode/Classes/views/font/FontLoader.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "459">
+               </Location>
+               <Location
+                  uuid = "5F316F2B-59DA-4084-B5B6-FA3CB8A8A4DF - 54c2347e9980d27c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static ReNode.FontLoader.loadFont(Swift.String) -&gt; ()"
+                  moduleName = "ReNode"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mini/Documents/seriousmd-renode/ReNode/Classes/views/font/FontLoader.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "238">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EABABFAF-B62C-429A-BCC1-E9B6E72D2F9F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ReNode/Classes/views/font/FontLoader.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "registerFont(withFilenameString:bundle:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
