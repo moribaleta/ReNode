@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
     
     s.ios.deployment_target = '11'
     s.swift_version = '5'
-    s.source_files = 'ReNode/Classes/**/*.{swift}'
+    s.source_files = 'ReNode/Classes/**/*'
     
     s.dependency "Texture", '~> 3.0.0'
     s.dependency "ReSwift"
