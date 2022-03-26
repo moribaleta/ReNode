@@ -3,7 +3,7 @@
   "version": "0.2.1",
   "summary": "A library component with common use for developing swift project.",
   "description": "A common library contains ready made components for fast development\ncombines RxSwift, ReSwift in a single package with components made from AsyncDisplayKit(Texture).",
-  "homepage": "https://gitlab.com/leapfroggr/ReNode.git",
+  "homepage": "https://github.com/moribaleta/ReNode.git",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,7 +12,7 @@
     "13190143": "moribaleta.work@gmail.com"
   },
   "source": {
-    "git": "https://gitlab.com/leapfroggr/ReNode.git",
+    "git": "https://github.com/moribaleta/ReNode.git",
     "tag": "0.2.1"
   },
   "platforms": {
