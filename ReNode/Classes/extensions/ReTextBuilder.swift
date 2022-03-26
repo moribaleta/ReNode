@@ -24,7 +24,7 @@ public struct ReTextBuilder {
     }
     
     public static func buildExpression(_ expression: String) -> ReAttributedStringTrait {
-        ReAttributedStringTraits.CommonText(expression)
+        ReAttributedStringTraits.ReText(expression)
     }
     
     public static func buildExpression(_ expression: NSAttributedString) -> ReAttributedStringTrait {
@@ -63,7 +63,7 @@ public enum ReAttributedStringTraits {
         }
     }
     
-    public struct CommonText : ReAttributedStringTrait {
+    public struct ReText : ReAttributedStringTrait {
         
         public var representation: NSAttributedString {
             self.text
@@ -99,6 +99,77 @@ public enum ReAttributedStringTraits {
             self.string     = string
             self.weight     = weight
             self.foreground = foreground
+        }
+    }
+    
+    public struct LinkText: ReAttributedStringTrait {
+        
+        public var string: String?
+        public var substring: String?
+        public var url: String?
+        public var attribute: ReTextType?
+        
+        public init( string: String?, substring: String?, url: String?, attribute: ReTextType?) {
+            self.string = string
+            self.substring = substring
+            self.url = url
+            self.attribute = attribute
+        }
+        
+        public var representation: NSAttributedString {
+            
+            guard let text = self.string else {
+                return NSAttributedString(string: "")
+            }
+            
+            guard let attribute = self.attribute else {
+                return NSAttributedString()
+            }
+            
+            // Create NSAttributedString first with attributes applied
+            let font = UIFont.systemFont(
+                ofSize: attribute.size,
+                weight: attribute.fontWeight
+            ).italize(attribute.isItalic)
+            let attributedText = NSAttributedString(string: text, attributes: [
+                NSAttributedString.Key.font: font,
+                NSAttributedString.Key.foregroundColor: attribute.color.uicolor
+            ])
+            
+            let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
+            mutableAttributedText.addAttributes([
+                NSAttributedString.Key.link: NSURL(string: self.url ?? "")!,
+                NSAttributedString.Key.foregroundColor: UIColor.systemBlue,
+                NSAttributedString.Key.underlineStyle: (NSUnderlineStyle.single.rawValue)
+            ], range: NSString(string: text).range(of: self.substring ?? ""))
+
+            return mutableAttributedText
+        }
+        
+    }
+    
+    
+    public struct IconText: ReAttributedStringTrait {
+
+        public let icon         : Icon
+        public let iconSize     : CGFloat
+        public let foreground   : UIColor
+        
+        public var representation: NSAttributedString {
+            let iconSize : CGFloat  = iconSize
+            let iconFont : UIFont   = UIFont.icon(from: Fonts.SeriousMD, ofSize: iconSize)
+            return NSAttributedString.init(
+                string: icon.rawValue,
+                attributes: [
+                    NSAttributedString.Key.font             : iconFont,
+                    NSAttributedString.Key.foregroundColor  : foreground
+                ])
+        }
+        
+        public init(icon: Icon, iconSize: CGFloat = 16, foreground: UIColor = Common.color.textbody.uicolor) {
+            self.icon           = icon
+            self.iconSize       = iconSize
+            self.foreground     = foreground
         }
     }
     

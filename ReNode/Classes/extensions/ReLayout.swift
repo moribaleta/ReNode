@@ -7,6 +7,7 @@
 //
 
 import AsyncDisplayKit
+import CoreGraphics
 
 @resultBuilder
 public struct LayoutBuilder {
@@ -139,7 +140,7 @@ extension ASStackLayoutSpec {
         return self
     }
     
-    public func linespacing(_ linespacing: CGFloat = 10) -> Self {
+    public func lineSpacing(_ linespacing: CGFloat = 10) -> Self {
         self.lineSpacing = linespacing
         return self
     }
@@ -149,43 +150,6 @@ extension ASStackLayoutSpec {
         return self
     }
     
-    @available(*, deprecated, message: "ASStackLayoutDirection cant be changed after the object was created")
-    public func stackDirection(_ direction: ASStackLayoutDirection) -> Self {
-        self.direction = direction
-        return self
-    }
-    
-    @available(*, deprecated, renamed: "hStackSpec")
-    public static func horizontal  (spacing: CGFloat, justify: ASStackLayoutJustifyContent = .start, align: ASStackLayoutAlignItems = .start, wrap: ASStackLayoutFlexWrap = .noWrap, lineSpacing: CGFloat = 0, @LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
-        tell(ASStackLayoutSpec(direction: .horizontal, spacing: spacing, justifyContent: justify, alignItems: align, children: children())) {
-            $0.flexWrap = wrap
-            $0.lineSpacing = lineSpacing
-        }
-    }
-    
-    @available(*, deprecated, renamed: "vStackSpec")
-    public static func vertical    (spacing: CGFloat, justify: ASStackLayoutJustifyContent = .start, align: ASStackLayoutAlignItems = .start, wrap: ASStackLayoutFlexWrap = .noWrap, lineSpacing: CGFloat = 0, @LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
-        tell(ASStackLayoutSpec(direction: .vertical, spacing: spacing, justifyContent: justify, alignItems: align, children: children())) {
-            $0.flexWrap = wrap
-            $0.lineSpacing = lineSpacing
-        }
-    }
-    
-    @available(*, deprecated, renamed: "hStackSpec")
-    public static func horizontal  (spacing: CGFloat, justify: ASStackLayoutJustifyContent = .start, align: ASStackLayoutAlignItems = .start, wrap: ASStackLayoutFlexWrap = .noWrap, lineSpacing: CGFloat = 0, _ children: [ASLayoutElement]) -> ASStackLayoutSpec {
-        tell(ASStackLayoutSpec(direction: .horizontal, spacing: spacing, justifyContent: justify, alignItems: align, children: children)) {
-            $0.flexWrap = wrap
-            $0.lineSpacing = lineSpacing
-        }
-    }
-    
-    @available(*, deprecated, renamed: "vStackSpec")
-    public static func vertical    (spacing: CGFloat, justify: ASStackLayoutJustifyContent = .start, align: ASStackLayoutAlignItems = .start, wrap: ASStackLayoutFlexWrap = .noWrap, lineSpacing: CGFloat = 0, _ children: [ASLayoutElement]) -> ASStackLayoutSpec {
-        tell(ASStackLayoutSpec(direction: .vertical, spacing: spacing, justifyContent: justify, alignItems: align, children: children)) {
-            $0.flexWrap = wrap
-            $0.lineSpacing = lineSpacing
-        }
-    }
 }
 
 
@@ -220,14 +184,6 @@ public enum ASLayoutSpecStackDirection {
 extension ASLayoutSpec {
     
     /**
-     * returns an empty layout with a specified frame
-     */
-    @available(*, deprecated, renamed: "ASSpacing")
-    public static func empty(height: CGFloat = 0, width: CGFloat = 0) -> ASLayoutSpec {
-        return .init().frame(width: width, height: height)
-    }//empty
-    
-    /**
      * returns the layout from the specified condition
      * - Parameters:
      *      - logic: conditional statement used to determine which layout to use
@@ -255,7 +211,12 @@ extension ASLayoutSpec {
     
     
     /**
-     * creates an empty stack layout spec
+     * creates a layour spec from ASStackLayoutSpec
+     * * NOTE: default value
+     *  - justify           : start
+     *  - align             :  start
+     *  - spacing        : 10
+     *  - lineSpacing  : 10
      */
     public static func stackSpec (direction: ASLayoutSpecStackDirection, @LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
         ASStackLayoutSpec(
@@ -276,13 +237,24 @@ extension ASLayoutSpec {
     
     /**
      * creates a layour spec from ASStackLayoutSpec.horizontal
+     * * NOTE: default value
+     *  - justify           : start
+     *  - align             :  start
+     *  - spacing        : 10
+     *  - lineSpacing  : 10
      */
     public static func hStackSpec (@LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
         return .hStackSpec(spacing: 10, children)
     }//hStackSpec
     
+    
     /**
-     * creates a layour spec from ASStackLayoutSpec.vertical
+     * creates a layour spec from ASStackLayoutSpec.horizontal
+     * * NOTE: default value
+     *  - justify           : start
+     *  - align             :  start
+     *  - spacing        : 10
+     *  - lineSpacing  : 10
      */
     public static func hStackSpec (spacing: CGFloat = 10, justify: ASStackLayoutJustifyContent = .start, align: ASStackLayoutAlignItems = .start, wrap: ASStackLayoutFlexWrap = .noWrap, lineSpacing: CGFloat = 10, alignContent: ASStackLayoutAlignContent = .start, @LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
         return  ASStackLayoutSpec(
@@ -296,15 +268,27 @@ extension ASLayoutSpec {
             children        : children())
     }//vStackSpec
     
+    
     /**
      * creates a layour spec from ASStackLayoutSpec.vertical
+     * * NOTE: default value
+     *  - justify           : start
+     *  - align             :  start
+     *  - spacing        : 10
+     *  - lineSpacing  : 10
      */
     public static func vStackSpec (@LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
         return  vStackSpec(spacing: 10, children)
     }//vStackSpec
     
+    
     /**
      * creates a layour spec from ASStackLayoutSpec.vertical
+     * * NOTE: default value
+     *  - justify           : start
+     *  - align             :  start
+     *  - spacing        : 10
+     *  - lineSpacing  : 10
      */
     public static func vStackSpec (spacing: CGFloat = 10, justify: ASStackLayoutJustifyContent = .start, align: ASStackLayoutAlignItems = .start, @LayoutBuilder _ children: () -> [ASLayoutElement]) -> ASStackLayoutSpec {
         return  ASStackLayoutSpec(
@@ -359,8 +343,6 @@ extension ASLayoutElement {
         ASCenterLayoutSpec(centeringOptions: positionAxes, sizingOptions: compressionAxes, child: self)
     }
  
-    
- 
     public func relativeSpec(horizontalPosition: ASRelativeLayoutSpecPosition = .start, verticalPosition: ASRelativeLayoutSpecPosition = .start, sizingOption: ASRelativeLayoutSpecSizingOption = .minimumSize) -> ASRelativeLayoutSpec {
         ASRelativeLayoutSpec(
             horizontalPosition  : horizontalPosition,
@@ -381,15 +363,6 @@ extension ASLayoutElement {
             background : background())
     }
     
-    @available(*, deprecated, renamed: "insetSpec")
-    public func inset(edges: UIEdgeInsets) -> ASLayoutSpec {
-        ASInsetLayoutSpec(insets: edges, child: self)
-    }
-    
-    @available(*, deprecated, renamed: "centerSpec")
-    public func centered(_ compressionAxes: ASCenterLayoutSpecSizingOptions, _ positionAxes: ASCenterLayoutSpecCenteringOptions) -> ASLayoutSpec {
-        ASCenterLayoutSpec(centeringOptions: positionAxes, sizingOptions: compressionAxes, child: self)
-    }
 }
 
 //MARK: Inset Specs
@@ -467,6 +440,13 @@ extension ASLayoutElement {
         
         return self
     }
+    
+    @discardableResult public func frame(size: CGSize) -> Self {
+        self.style.height = .init(unit: .points, value: size.height)
+        self.style.width  = .init(unit: .points, value: size.width)
+        return self
+    }
+    
     
     /**
      * styles the layout into equal height and width

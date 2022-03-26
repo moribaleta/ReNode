@@ -22,6 +22,19 @@ import Foundation
 }
 
 /**
+ Obtains an class-type instance and tells it to
+ configure using a user-specified block.
+ - Parameters:
+    - target: The instance to apply.
+    - builder: The block to configure the instance.
+ - Returns: The newly created instance.
+ */
+@discardableResult public func make<Target>(_ target: Target, _ builder: () -> Void) -> Target {
+  builder()
+  return target
+}
+
+/**
  Obtains an optional class-type instance and tells it to
  configure using a user-specified block if the instance exists.
  - Parameters:

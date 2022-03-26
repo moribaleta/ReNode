@@ -1,10 +1,10 @@
 CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
 CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/ReNode
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/PINCache" "${PODS_CONFIGURATION_BUILD_DIR}/PINOperation" "${PODS_CONFIGURATION_BUILD_DIR}/PINRemoteImage" "${PODS_CONFIGURATION_BUILD_DIR}/ReSwift" "${PODS_CONFIGURATION_BUILD_DIR}/ReSwiftThunk" "${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa" "${PODS_CONFIGURATION_BUILD_DIR}/RxRelay" "${PODS_CONFIGURATION_BUILD_DIR}/RxSwift" "${PODS_CONFIGURATION_BUILD_DIR}/Texture"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/DateTools" "${PODS_CONFIGURATION_BUILD_DIR}/PINCache" "${PODS_CONFIGURATION_BUILD_DIR}/PINOperation" "${PODS_CONFIGURATION_BUILD_DIR}/PINRemoteImage" "${PODS_CONFIGURATION_BUILD_DIR}/ReSwift" "${PODS_CONFIGURATION_BUILD_DIR}/ReSwiftThunk" "${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa" "${PODS_CONFIGURATION_BUILD_DIR}/RxKeyboard" "${PODS_CONFIGURATION_BUILD_DIR}/RxRelay" "${PODS_CONFIGURATION_BUILD_DIR}/RxSwift" "${PODS_CONFIGURATION_BUILD_DIR}/SVGgh" "${PODS_CONFIGURATION_BUILD_DIR}/SnapKit" "${PODS_CONFIGURATION_BUILD_DIR}/Texture"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) $(FRAMEWORK_SEARCH_PATHS)/ReSwiftThunk.framework/Headers
+HEADER_SEARCH_PATHS = $(inherited) $(FRAMEWORK_SEARCH_PATHS)/SVGgh.framework/Headers
 LIBRARY_SEARCH_PATHS = $(inherited) "${DT_TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}" /usr/lib/swift
-OTHER_LDFLAGS = $(inherited) -framework "AVFoundation" -framework "AssetsLibrary" -framework "AsyncDisplayKit" -framework "CoreLocation" -framework "CoreMedia" -framework "MapKit" -framework "Photos" -framework "ReSwift" -framework "ReSwiftThunk" -framework "RxCocoa" -framework "RxSwift" -weak_framework "UIKit"
+OTHER_LDFLAGS = $(inherited) -framework "AVFoundation" -framework "AssetsLibrary" -framework "AsyncDisplayKit" -framework "CoreGraphics" -framework "CoreImage" -framework "CoreLocation" -framework "CoreMedia" -framework "CoreServices" -framework "CoreText" -framework "DateTools" -framework "Foundation" -framework "MapKit" -framework "Photos" -framework "ReSwift" -framework "ReSwiftThunk" -framework "RxCocoa" -framework "RxKeyboard" -framework "RxSwift" -framework "SVGgh" -framework "SnapKit" -framework "UIKit" -weak_framework "UIKit"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

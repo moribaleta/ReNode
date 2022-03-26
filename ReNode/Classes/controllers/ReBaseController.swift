@@ -26,7 +26,7 @@ import ReSwift
         * recommended :
             * perform setup in loadView
  */
-open class ReBaseController<E, T, V>: ASDKViewController<ASDisplayNode>, StoreSubscriber {
+open class ReBaseController<E, T, V>: ASDKViewController<ASDisplayNode> {
 
     ///contains the store state being used be the view controller
     public var store : Store<E>?
@@ -60,14 +60,6 @@ open class ReBaseController<E, T, V>: ASDKViewController<ASDisplayNode>, StoreSu
         store?.subscribe(self)
     }
     
-    @available(*, deprecated, message: "used onStateUpdate to listen to state changes without add super on override here", renamed: "onStateUpdate")
-    open func newState(state: E) {
-        if let state = extractStoreState(state: state) {
-            self.onStatePreRender(state: state)
-            self.statePublisher.onNext(state)
-            self.onStateUpdate(state: state)
-        }
-    }
     
     ///override this function to listen to state changes
     open func onStateUpdate(state: T){
@@ -85,6 +77,21 @@ open class ReBaseController<E, T, V>: ASDKViewController<ASDisplayNode>, StoreSu
     }
     
 }//ReactiveBaseController
+
+
+extension ReBaseController: StoreSubscriber {
+    
+    @available(*, deprecated, message: "used onStateUpdate to listen to state changes without add super on override here", renamed: "onStateUpdate")
+    public func newState(state: E) {
+        if let state = extractStoreState(state: state) {
+            self.onStatePreRender(state: state)
+            self.statePublisher.onNext(state)
+            self.onStateUpdate(state: state)
+        }
+    }
+    
+}
+
 
 open class ReSingleStateController<E, V> : ReBaseController<E,E,V> {
     

@@ -23,14 +23,7 @@ import Foundation
             }
         ````
  */
-public class StatePropertyList<T> : StatePropertyType, Equatable {
-    
-    public static func == (lhs: StatePropertyList<T>, rhs: StatePropertyList<T>) -> Bool {
-        
-        //not really used
-        
-        return true
-    }
+public class StatePropertyList<T> : StatePropertyType {
     
     public subscript (index: Int) -> T? {
         get {
@@ -95,21 +88,6 @@ public class StatePropertyList<T> : StatePropertyType, Equatable {
     public var changes = [StatePropertyAction<T>]()
     
     /**
-        clears the arrays - changes, added, remove
-        - NOTE:
-            - overriden from StatePropertyType
-    */
-    @available(*, deprecated, renamed: "clearFlag")
-    public override func clear() {
-        self.changes        = []
-        self.isDirty        = false
-        
-        (self.list as? [StateClearable])?.forEach({ (clearable) in
-            clearable.clear()
-        })
-    }
-    
-    /**
         clears the flag of isDirty and also the changes
         - NOTE:
             - overriden from StatePropertyType
@@ -123,31 +101,35 @@ public class StatePropertyList<T> : StatePropertyType, Equatable {
         })
     }
     
+    ///sets the value of the list
+    public func setValue(_ elements: [T]) {
+        self.list       = elements
+        self.isDirty    = true
+    }
+    
+    
     ///sets the specific value from the list
     public func setElement(index: Int, value: T, rerender: Bool = true) {
         self.list[index] = value
         self.appendChange(type: .change, index: index, value: value, rerender: rerender)
     }
     
+    
+    ///set element on index based on the where clause function
+    public func setElement(value: T, where: CallBack.typeCall<T, Bool>, rerender: Bool = true) {
+        guard let index = self.firstIndex(where: `where`) else {
+            return
+        }
+        
+        self.setElement(index: index, value: value, rerender: rerender)
+    }
+    
+    
     ///removes the value from the list then appends StatePropertyAction with the value for reference
     public func removeElement(index: Int) -> T {
         let item = self.list.remove(at: index)
         self.appendChange(type: .remove, index: index, value: item)
         return item
-    }
-    
-    
-    @available(*, deprecated, message: "Use: addElement(value: T, index: Int? = nil)")
-    ///adds an element into the list --- DEPRECATED
-    public func addElement(index: Int?, value: T) {
-        
-        if let index = index {
-            self.list.insert(value, at: index)
-        }else{
-            self.list.append(value)
-        }
-
-        self.appendChange(type: .add, index: index ?? self.list.count - 1 , value: value)
     }
     
     ///adds an element into the list
@@ -177,27 +159,12 @@ public class StatePropertyList<T> : StatePropertyType, Equatable {
         }
     }
     
-    ///sets the value of the list
-    public func setValue(_ elements: [T]) {
-        self.list       = elements
-        self.isDirty    = true
-    }
     
-    @available(*, deprecated, renamed: "setValue")
-    ///sets the value of the list
-    public func set(elements: [T]) {
-        self.list       = elements
-        self.isDirty    = true
-    }
+    
     
 } //StatePropertyList
 
-extension StatePropertyList: Hashable where T: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(list)
-        hasher.combine(isDirty)
-    }
-}
+
 
 //helper functions for StatePropertyList
 extension StatePropertyList {
@@ -305,16 +272,29 @@ public protocol Markable {
 }
 
 extension StatePropertyList : Markable {
+    
+    ///sets the selected index to be active/rerendered
     public func markChanged(index: Int) {
         self.setElement(index: index, value: self.list[index], rerender: true)
     }
+    
+    ///sets the value to rerender if the callback returns true
+    public func markChanged(where: CallBack.typeCall<T, Bool>) {
+        guard let index = self.firstIndex(where: `where`) else {
+            return
+        }
+        self.setElement(index: index, value: self.list[index], rerender: true)
+    }//markChanged
 }
 
 extension StatePropertyList where T : Markable {
+    
+    ///sets the selected index to be active/rerendered
     public func markChanged(indexPath: IndexPath) {
         self.markChanged(index: indexPath.section)
         self.list[indexPath.section].markChanged(index: indexPath.row)
     }
+    
 }
 
 /**

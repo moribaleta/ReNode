@@ -110,85 +110,46 @@ open class ReStack<E> : ReactiveNode<StatePropertyList<E>>, ReEmptyState {
     
     open override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         
-        var stack = ASStackLayoutSpec(direction: .vertical, spacing: self.rowSpacing, justifyContent: .start,
+        /*var stack = ASStackLayoutSpec(direction: .vertical, spacing: self.rowSpacing, justifyContent: .start,
             alignItems: .stretch, children: self.children)
         
         if self.stackDirection == .horizontal {
             stack = ASStackLayoutSpec(direction: .horizontal, spacing: self.rowSpacing, justifyContent: .start,
                                       alignItems: .stretch, flexWrap: .wrap,
                                       alignContent: .start, lineSpacing: self.rowSpacing, children: self.children)
+        }*/
+        
+        var stack = ASLayoutSpec
+            .vStackSpec {
+                self.children
+            }
+            .align()
+            .spacing(self.rowSpacing)
+        
+        if self.stackDirection == .horizontal {
+            stack = ASLayoutSpec
+                .hStackSpec{
+                    self.children
+                }
+                .align()
+                .spacing(self.rowSpacing)
+                .wrap()
+                .alignContent(.start)
+                .lineSpacing(self.rowSpacing)
         }
         
+        
         if self._isEmpty {
-            stack = ASStackLayoutSpec(direction: .vertical, spacing: 10, justifyContent: .start,
-            alignItems: .stretch, children: [self.renderEmptyView?() ?? self.defaultEmptyView])
+            /*stack = ASStackLayoutSpec(direction: .vertical, spacing: 10, justifyContent: .start,
+            alignItems: .stretch, children: [self.renderEmptyView?() ?? self.defaultEmptyView])*/
+            stack = ASLayoutSpec
+                .vStackSpec{
+                    self.renderEmptyView?() ?? self.defaultEmptyView
+                }
+                .align()
         }
         
         return stack
     }
     
 }//ReStack
-
-
-/**
- ui component implementing ReStack with scrollable feature
- */
-open class ReStackScrollable<E> : ReStack<E> {
-    
-    open var isScrollable = true {
-        didSet{
-            self.setNeedsLayout()
-        }
-    }
-    
-    public var scrollNode = ReScrollNode()
-    
-    public override init() {
-        super.init()
-        
-        self.scrollNode.layoutSpecBlock = {
-            [unowned self] display,constrainedSize -> ASLayoutSpec in
-            return self.layoutSpec(constrainedSize)
-        }
-    }
-    
-    open override func reloadData(value: StatePropertyList<E>) {
-        super.reloadData(value: value)
-        self.scrollNode.setNeedsLayout()
-        self.setNeedsLayout()
-    }
-    
-    open override func applyChange(_ changes: [StatePropertyAction<E>]) {
-        super.applyChange(changes)
-        self.scrollNode.setNeedsLayout()
-        self.setNeedsLayout()
-    }
-    
-    open override func didLoad() {
-        super.didLoad()
-        self.scrollNode.borderWidth = 1
-        self.scrollNode.borderColor = UIColor.red.cgColor
-    }
-    
-    open func layoutSpec(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        let stack = ASStackLayoutSpec(direction: .vertical, spacing: 10, justifyContent: .start,
-                                 alignItems: .stretch, children: self.children)
-        
-        if self._isEmpty {
-            stack.children?.append(self.renderEmptyView?() ?? self.defaultEmptyView)
-        }
-        
-        return ASInsetLayoutSpec(insets: .init(top: 10, sides: 10, bottom: 20), child: stack)
-    }
-    
-    open override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.scrollNode.style.height        = .init(unit: .points, value: constrainedSize.min.height)
-        self.scrollNode.style.minHeight     = .init(unit: .points, value: 200)
-        if isScrollable {
-            return ASInsetLayoutSpec(insets: .zero, child: scrollNode)
-        }
-        return layoutSpec(constrainedSize)
-    }
-    
-}//ReStackScrollable
-

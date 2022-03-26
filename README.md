@@ -20,6 +20,10 @@ it, simply add the following line to your Podfile:
 pod 'ReNode'
 ```
 
+## Documentation
+to see more information 
+https://www.notion.so/seriousmd/ReNode-IOS-49a01d5f00a84f4eadc923e324763362#9a4029ac09d5479ea0a697b0207d6285
+
 ## Author
 
 13190143, moribaleta.work@gmail.com

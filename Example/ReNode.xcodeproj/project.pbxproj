@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D74C98B278360BF0099C24B /* SampleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74C98A278360BF0099C24B /* SampleController.swift */; };
+		3D74C98D278361970099C24B /* SampleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74C98C278361970099C24B /* SampleState.swift */; };
+		3D74C98F2784B9840099C24B /* SampleThunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74C98E2784B9840099C24B /* SampleThunk.swift */; };
+		3D74C9912784BA150099C24B /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74C9902784BA150099C24B /* SampleView.swift */; };
+		3D74C9942785A94B0099C24B /* SampleButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74C9932785A94B0099C24B /* SampleButtons.swift */; };
+		3D74C9962785AA820099C24B /* SampleTexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74C9952785AA820099C24B /* SampleTexts.swift */; };
+		3D74C9B9278753750099C24B /* SampleNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74C9B8278753750099C24B /* SampleNavigation.swift */; };
+		3DB6AA5027C9E5560091E717 /* SampleModals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB6AA4F27C9E5560091E717 /* SampleModals.swift */; };
+		3DC1A52627CBF5D100A00FB8 /* SampleControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC1A52527CBF5D100A00FB8 /* SampleControls.swift */; };
+		A3A6307527DEC47F0077CAC7 /* SampleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A6307427DEC47F0077CAC7 /* SampleContainer.swift */; };
+		A3B082F427E2CF9F005CF130 /* SampleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B082F327E2CF9F005CF130 /* SampleTextField.swift */; };
+		A3C3B7B227C5D85B00ABC09C /* SampleDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C3B7B127C5D85B00ABC09C /* SampleDropdown.swift */; };
 		A3F5E0FE26BCB59B000BF21B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F5E0FD26BCB59B000BF21B /* AppDelegate.swift */; };
 		A3F5E10026BCB59B000BF21B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F5E0FF26BCB59B000BF21B /* SceneDelegate.swift */; };
 		A3F5E10226BCB59B000BF21B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F5E10126BCB59B000BF21B /* ViewController.swift */; };
@@ -19,6 +31,15 @@
 /* Begin PBXFileReference section */
 		27B59BDDD84AC51A6B05709D /* Pods_ReNodeSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReNodeSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E6991214A0E436990660E78 /* ReNode.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ReNode.podspec; path = ../ReNode.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		3D74C98A278360BF0099C24B /* SampleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleController.swift; sourceTree = "<group>"; };
+		3D74C98C278361970099C24B /* SampleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleState.swift; sourceTree = "<group>"; };
+		3D74C98E2784B9840099C24B /* SampleThunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleThunk.swift; sourceTree = "<group>"; };
+		3D74C9902784BA150099C24B /* SampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
+		3D74C9932785A94B0099C24B /* SampleButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleButtons.swift; sourceTree = "<group>"; };
+		3D74C9952785AA820099C24B /* SampleTexts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTexts.swift; sourceTree = "<group>"; };
+		3D74C9B8278753750099C24B /* SampleNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleNavigation.swift; sourceTree = "<group>"; };
+		3DB6AA4F27C9E5560091E717 /* SampleModals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleModals.swift; sourceTree = "<group>"; };
+		3DC1A52527CBF5D100A00FB8 /* SampleControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleControls.swift; sourceTree = "<group>"; };
 		3FDB695CBD9943FEE301079D /* Pods-ReNode_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReNode_Tests.debug.xcconfig"; path = "Target Support Files/Pods-ReNode_Tests/Pods-ReNode_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		56D807F2E8B30720AA597C1D /* Pods-ReNodeSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReNodeSample.debug.xcconfig"; path = "Target Support Files/Pods-ReNodeSample/Pods-ReNodeSample.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -35,6 +56,9 @@
 		A39471EB26B36AE4002C2004 /* RxCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A39471ED26B36AE4002C2004 /* RxRelay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxRelay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A39471EF26B36AE4002C2004 /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3A6307427DEC47F0077CAC7 /* SampleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleContainer.swift; sourceTree = "<group>"; };
+		A3B082F327E2CF9F005CF130 /* SampleTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTextField.swift; sourceTree = "<group>"; };
+		A3C3B7B127C5D85B00ABC09C /* SampleDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDropdown.swift; sourceTree = "<group>"; };
 		A3F5E0FB26BCB59B000BF21B /* ReNodeSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReNodeSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3F5E0FD26BCB59B000BF21B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3F5E0FF26BCB59B000BF21B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +85,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D74C9922785A93B0099C24B /* sampleviews */ = {
+			isa = PBXGroup;
+			children = (
+				3D74C9932785A94B0099C24B /* SampleButtons.swift */,
+				3D74C9952785AA820099C24B /* SampleTexts.swift */,
+				A3C3B7B127C5D85B00ABC09C /* SampleDropdown.swift */,
+				3DB6AA4F27C9E5560091E717 /* SampleModals.swift */,
+				3DC1A52527CBF5D100A00FB8 /* SampleControls.swift */,
+				A3A6307427DEC47F0077CAC7 /* SampleContainer.swift */,
+				A3B082F327E2CF9F005CF130 /* SampleTextField.swift */,
+			);
+			path = sampleviews;
+			sourceTree = "<group>";
+		};
 		536570EA1743FC0BE508F6C3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +187,12 @@
 				A3F5E10B26BCB59C000BF21B /* LaunchScreen.storyboard */,
 				A3F5E10E26BCB59C000BF21B /* Info.plist */,
 				A3F5E10626BCB59B000BF21B /* ReNodeSample.xcdatamodeld */,
+				3D74C9B8278753750099C24B /* SampleNavigation.swift */,
+				3D74C98A278360BF0099C24B /* SampleController.swift */,
+				3D74C9902784BA150099C24B /* SampleView.swift */,
+				3D74C9922785A93B0099C24B /* sampleviews */,
+				3D74C98C278361970099C24B /* SampleState.swift */,
+				3D74C98E2784B9840099C24B /* SampleThunk.swift */,
 			);
 			path = ReNodeSample;
 			sourceTree = "<group>";
@@ -252,6 +296,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ReNodeSample/Pods-ReNodeSample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DateTools/DateTools.framework",
 				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
 				"${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework",
 				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
@@ -259,13 +304,17 @@
 				"${BUILT_PRODUCTS_DIR}/ReSwift/ReSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ReSwiftThunk/ReSwiftThunk.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxKeyboard/RxKeyboard.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGgh/SVGgh.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/StorybookKit/StorybookKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Texture/AsyncDisplayKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTools.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINOperation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
@@ -273,8 +322,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReSwiftThunk.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxKeyboard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGgh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StorybookKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AsyncDisplayKit.framework",
 			);
@@ -290,10 +342,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D74C9B9278753750099C24B /* SampleNavigation.swift in Sources */,
+				3D74C9912784BA150099C24B /* SampleView.swift in Sources */,
 				A3F5E10826BCB59B000BF21B /* ReNodeSample.xcdatamodeld in Sources */,
+				3D74C98D278361970099C24B /* SampleState.swift in Sources */,
+				3D74C9942785A94B0099C24B /* SampleButtons.swift in Sources */,
+				3D74C9962785AA820099C24B /* SampleTexts.swift in Sources */,
+				3D74C98F2784B9840099C24B /* SampleThunk.swift in Sources */,
+				3DC1A52627CBF5D100A00FB8 /* SampleControls.swift in Sources */,
 				A3F5E10226BCB59B000BF21B /* ViewController.swift in Sources */,
 				A3F5E0FE26BCB59B000BF21B /* AppDelegate.swift in Sources */,
 				A3F5E10026BCB59B000BF21B /* SceneDelegate.swift in Sources */,
+				A3B082F427E2CF9F005CF130 /* SampleTextField.swift in Sources */,
+				A3A6307527DEC47F0077CAC7 /* SampleContainer.swift in Sources */,
+				A3C3B7B227C5D85B00ABC09C /* SampleDropdown.swift in Sources */,
+				3D74C98B278360BF0099C24B /* SampleController.swift in Sources */,
+				3DB6AA5027C9E5560091E717 /* SampleModals.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -220,15 +220,14 @@ open class ReTextNode : ASTextNode {
                      isRequired : isRequired)
     }
     
+    open override func didLoad() {
+        super.didLoad()
+        self.delegate = self
+    }
+    
     /**
      * used for constructing complex string attribute using TextBuilder
      */
-    /*public convenience init(@ReTextBuilder attributes: () -> NSAttributedString) {
-        self.init()
-        self.text           = attributes().string
-        self.attributedText = attributes()
-    }*/
-    
     public func setText(_ text: String, attribute : ReTextType = .bodyText, size: CGFloat? = nil, fontWeight: UIFont.Weight? = nil, color: UIColor? = nil, highlight: String? = nil,  isItalic: Bool? = nil,  isRequired: Bool = false) {
         self.text = text
         self.attribute = attribute
@@ -245,12 +244,61 @@ open class ReTextNode : ASTextNode {
         self.attributedText = NSAttributedString(string: self.text, attributes: attributedDict).highlight(highlight ?? "").makeRequired(isRequired: isRequired)
     }
     
-    /*
-     open override func didLoad() {
-     super.didLoad()
-     self.setText(text: self.text, attribute: self.attribute, size: self.fontSize)
-     }
+    /**
+     * used for constructing complex string attribute using TextBuilder
      */
+    public convenience init(@ReTextBuilder attributes: () -> NSAttributedString) {
+        self.init()
+        self.text           = attributes().string
+        self.attributedText = attributes()
+    }
+    
+    public func setClickableLinks(_ links: [LinkChunk]) {
+        guard let attributedText = self.attributedText else { return }
+        
+        let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
+        let nsText = NSString(string: attributedText.string)
+        
+        for link in links {
+            mutableAttributedText.addAttributes([
+                NSAttributedString.Key.link: NSURL(string: link.urlPath)!,
+                NSAttributedString.Key.foregroundColor: UIColor.systemBlue,
+                NSAttributedString.Key.underlineStyle: (NSUnderlineStyle.single.rawValue)
+            ], range: nsText.range(of: link.substring))
+        }
+        
+        self.attributedText = mutableAttributedText
+        self.isUserInteractionEnabled = true
+    }
+ 
+    /**
+     * changes the text alignment of the attributed text
+     */
+    func alignText(_ alignment: NSTextAlignment) -> Self {
+        self.attributedText = self.attributedText?.aligned(alignment)
+        return self
+    }
+    
+    public struct LinkChunk {
+        let substring: String
+        let urlPath: String
+        public init (substring: String, urlPath: String) {
+            self.substring = substring
+            self.urlPath = urlPath
+        }
+    }
+    
+}
+
+extension ReTextNode: ASTextNodeDelegate {
+    public func textNode(_ textNode: ASTextNode!, shouldHighlightLinkAttribute attribute: String!, value: Any!, at point: CGPoint) -> Bool {
+        true
+    }
+
+    public func textNode(_ textNode: ASTextNode!, tappedLinkAttribute attribute: String!, value: Any!, at point: CGPoint, textRange: NSRange) {
+        guard let url = value as? URL else { return }
+        UIApplication.shared.open(url)
+    }
 }
 
 extension Common {

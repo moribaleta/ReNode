@@ -1,22 +1,23 @@
 //
-//  ReCollection.swift
+//  ReCollection2.swift
 //  SMDModuleUtility
 //
-//  Created by Gabriel Mori Baleta on 2/20/20.
-//  Copyright © 2020 Leapfroggr Inc. All rights reserved.
+//  Created by Gabriel Mori Baleta on 8/27/21.
+//  Copyright © 2021 Leapfroggr Inc. All rights reserved.
 //
+
 
 import Foundation
 import AsyncDisplayKit
 import RxSwift
 import UIKit
 
+
 /**
- UI component that implements table used for rendering a single state property in a table
- ATTENTION:
- * if you are using a single list use singleListBind() use sectionListBind() on multiple section
+ * ResizeableNode with a collection view
+ * implements StatePropertyList as the data model to render cell
  */
-open class ReCollection<E> : ASCollectionNode, ASCollectionDataSource, ASCollectionDelegate {
+open class ReCollection<E> : ResizeableNode, ASCollectionDelegate, ASCollectionDataSource {
     
     public typealias StateList = StatePropertyList<StatePropertyList<E>>
     
@@ -33,59 +34,56 @@ open class ReCollection<E> : ASCollectionNode, ASCollectionDataSource, ASCollect
     //open var renderHeader : ((Any?, ASTableNode) -> UIView)?
     open var renderSectionHeader: ((Any?, Int, ASCollectionNode) -> ASCellNode)?
     
-    
     /// an optional table delegate if you want to use your own function
     public weak var collectionDelegate : ASCollectionDelegate?
     
     ///publish subject for emitting the item selected and it's indexpath
-    var emitSelect  = PublishSubject<(item : E, indexPath: IndexPath)>()
+    var emitSelect              = PublishSubject<(item : E, indexPath: IndexPath)>()
     
     ///subscriber for the selection in the table
-    public var rxSelect    : Observable<(item : E, indexPath: IndexPath)> {
+    public var rxSelect         : Observable<(item : E, indexPath: IndexPath)> {
         return emitSelect
     }
     
-    public var disposeBag   = DisposeBag()
+    public var disposeBag       = DisposeBag()
     
-    public var currsection_count = 0
+    public var collection       : ASCollectionNode!
+    public var collectionlayout : UICollectionViewLayout!
     
-    public func disposeView() {
+    public override init() {
+        super.init()
+    }
+    
+    public convenience init(_ layout: UICollectionViewLayout) {
+        self.init()
+        self.collectionlayout = layout
+        self.collection       = .init(collectionViewLayout: layout)
         
+    }
+    
+    public convenience init(delegate: ASCollectionLayoutDelegate, facilitator: ASCollectionViewLayoutFacilitatorProtocol? = nil ) {
+        self.init()
+        self.collection = .init(layoutDelegate: delegate, layoutFacilitator: facilitator)
     }
     
     override open func didLoad() {
         super.didLoad()
-        self.registerSupplementaryNode(ofKind: UICollectionView.elementKindSectionHeader)
-        self.delegate   = self
-        self.dataSource = self
-        self.view.delaysContentTouches = false
-        self.view.panGestureRecognizer.delaysTouchesBegan = false
         
-        
-        self.emitContentChanges
-            .debounce(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
-            .subscribe(onNext: {
-                [weak self] in
-                self?.onContentChanges()
-            }).disposed(by: self.disposeBag)
-        
-        self.emitContentChanges.onNext(())
-        
+        self.collection.delegate   = self
+        self.collection.dataSource = self
+        self.collection.registerSupplementaryNode(ofKind: UICollectionView.elementKindSectionHeader)
+        self.collection.view.delaysContentTouches = false
+        self.collection.view.panGestureRecognizer.delaysTouchesBegan = false
     }
     
     ///passes a single stateproperty list then maps it to a stateproperty list of sections to the table
     public func singleListBind(simple: Observable<StatePropertyList<E>>) {
         let obx = simple.map { simpleList -> StateList in
-            let data = StateList([simpleList])
-            if simpleList.isEmpty {
-                data.isDirty = true
-            } else {
-                data.isDirty = false
-                data.appendChange(type: .change, index: 0, value: simpleList)
-            }
+            let data        = StateList([simpleList])
+            data.isDirty    = false
+            data.appendChange(type: .change, index: 0, value: simpleList)
             return data
         }
-        
         reBind(obx: obx)
     }
     
@@ -130,7 +128,7 @@ open class ReCollection<E> : ASCollectionNode, ASCollectionDataSource, ASCollect
         
         self.tablelist = value
         if value.isDirty {
-            self.reloadData()
+            self.collection.reloadData()
         } else if value.hasChanges {
             self.applySectionChange(changes: value.changes)
         } else{
@@ -142,11 +140,10 @@ open class ReCollection<E> : ASCollectionNode, ASCollectionDataSource, ASCollect
     }
     
     open func renderState(value: StateList) {
-        self.currsection_count = value.count
         self.tablelist = value
-        self.reloadData()
+        self.collection.reloadData()
     }
-    
+
     
     /// apply changes on a section level
     public func applySectionChange(changes: [StatePropertyAction<StatePropertyList<E>>]) {
@@ -158,26 +155,22 @@ open class ReCollection<E> : ASCollectionNode, ASCollectionDataSource, ASCollect
             
             switch change.type {
             case .add :
-                self.currsection_count += 1
-                self.insertSections(indexSet)
+                self.collection.insertSections(indexSet)
             case .change:
                 if change.rerender {
                     self.reloadSection(section: self.tablelist!.get(index: change.index)!, sectionIndex: change.index)
                 }
             case .remove:
-                self.currsection_count -= self.currsection_count > 0 ? 1 : 0
-                self.deleteSections(indexSet)
+                self.collection.deleteSections(indexSet)
             }
         }
-        
-        
     }//applySectionChange
     
     public func reloadSection(section: StatePropertyList<E>, sectionIndex: Int) {
         if section.isDirty {
             
             let indexSet = IndexSet.init(integer: sectionIndex)
-            self.reloadSections(indexSet)
+            self.collection.reloadSections(indexSet)
         } else if section.hasChanges {
             self.applyChange(section.changes, sectionIndex: sectionIndex)
         }
@@ -186,8 +179,7 @@ open class ReCollection<E> : ASCollectionNode, ASCollectionDataSource, ASCollect
     
     ///applies the changes from the changes in state propertylist
     public func applyChange(_ changes: [StatePropertyAction<E>], sectionIndex: Int) {
-        
-        performBatchUpdates({
+        self.collection.performBatchUpdates({
             for change in changes {
                 
                 let indexPath = IndexPath(row: change.index, section: sectionIndex)
@@ -195,17 +187,13 @@ open class ReCollection<E> : ASCollectionNode, ASCollectionDataSource, ASCollect
                 if (sectionIndex < self.tablelist?.count ?? 0) && (change.index < self.tablelist?[sectionIndex]?.count ?? 0 ) {
                     switch change.type {
                     case .add :
-                        //self.insertRows(at: [ indexPath ])
-                        self.insertItems(at: [indexPath])
+                        self.collection     .insertItems(at: [indexPath])
                     case .change:
                         if change.rerender {
-                            print("sample change rerender: \(indexPath)")
-                            self.reloadItems(at: [indexPath])
-                            //self.reloadRows(at: [ indexPath ])
+                            self.collection .reloadItems(at: [indexPath])
                         }
                     case .remove:
-                        self.deleteItems(at: [indexPath])
-                        //self.deleteRows(at: [ indexPath ])
+                        self.collection     .deleteItems(at: [indexPath])
                     }
                 } else {
                     print("am i a joke to you?")
@@ -216,31 +204,52 @@ open class ReCollection<E> : ASCollectionNode, ASCollectionDataSource, ASCollect
         
     }//applyChange
     
-    public func collectionNode(_ collectionNode: ASCollectionNode,
-                        nodeForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> ASCellNode {
-        let headerTitle = self.tablelist?.get(index: indexPath.section) as? StateSectionList<E>
-        return self.renderSectionHeader?(headerTitle, indexPath.section, self) ?? ReCollectionHeader()
+    open override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+        self.collection.insetSpec(.zero)
     }
     
-    public func numberOfSections(in collectionNode: ASCollectionNode) -> Int {
-        return self.currsection_count
+    public func collectionNode(_ collectionNode: ASCollectionNode,
+                               nodeForSupplementaryElementOfKind kind: String,
+                               at indexPath: IndexPath) -> ASCellNode {
+        if kind == UICollectionView.elementKindSectionHeader {
+            let headerTitle = self.tablelist?.get(index: indexPath.section) as? StateSectionList<E>
+            let sectionItem = headerTitle?.sectionItem
+            return self.renderSectionHeader?(sectionItem, indexPath.section, collectionNode) ?? ReCollectionHeader(title: (sectionItem as? String))
+        }
+        return ASCellNode()
     }
+
+    
+    public func numberOfSections(in collectionNode: ASCollectionNode) -> Int {
+        return self.tablelist?.count ?? 0
+    }
+    
     
     public func collectionNode(_ collectionNode: ASCollectionNode, numberOfItemsInSection section: Int) -> Int {
         let count = self.tablelist?.get(index: section)?.count ?? 0
         return count//self.tablelist?.get(index: section)?.count ?? 0
     }
     
-    public func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
-        if let item = self.tablelist?.get(index: indexPath.section)?.get(index: indexPath.row) {
-            return self.renderCell?(item, collectionNode, ReCellProperties(indexPath: indexPath, searchTerm: nil, isSelected: false)) ?? ASCellNode()
+    
+    public func collectionNode(_ collectionNode: ASCollectionNode, nodeBlockForItemAt indexPath: IndexPath) -> ASCellNodeBlock {
+        let nodeBlock : CallBack.returnType<ASCellNode> = {
+            if let item = self.tablelist?.get(index: indexPath.section)?.get(index: indexPath.row) {
+                return self.renderCell?(
+                    item,
+                    collectionNode,
+                    ReCellProperties(
+                        indexPath   : indexPath,
+                        searchTerm  : nil,
+                        isSelected  : false)) ?? ASCellNode()
+            }
+            return .init()
         }
-        return ASCellNode()
+        return nodeBlock
     }
     
+    
     public func collectionNode(_ collectionNode: ASCollectionNode, didSelectItemAt indexPath: IndexPath) {
-        self.deselectItem(at: indexPath, animated: true)
+        self.collection.deselectItem(at: indexPath, animated: true)
         
         if let item = self.tablelist?.get(index: indexPath.section)?.get(index: indexPath.row) {
             self.emitSelect.onNext((item: item, indexPath: indexPath))
@@ -274,7 +283,7 @@ open class ReCollection<E> : ASCollectionNode, ASCollectionDataSource, ASCollect
     }
     
     public var lastContentOffset: CGFloat = 0
-    
+
     // MARK: dont add private this will not be called if doing so
     // this delegate is called when the scrollView (i.e your UITableView) will start scrolling
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -283,7 +292,7 @@ open class ReCollection<E> : ASCollectionNode, ASCollectionDataSource, ASCollect
             self.emitOnScroll.onNext(lastContentOffset)
         }
     }
-    
+
     // MARK: dont add private this will not be called if doing so
     // while scrolling this delegate is being called so you may now check which direction your scrollView is being scrolled to
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -322,36 +331,15 @@ open class ReCollection<E> : ASCollectionNode, ASCollectionDataSource, ASCollect
         super.layoutDidFinish()
         self.emitContentChanges.onNext(())
     }
-}//SimpleRxTable
-
-
-extension ReCollection : ReScrollNodeType {
     
-    public func onContentChanges() {
-        guard automaticScrollHeightContentEmit else {
-            return
-        }
-        
-        
-        let viewSize    = self.view.frame.height
-        let contentSize = self.view.contentSize.height
-        if contentSize < viewSize + self.scrollOffsetThreshold {
-            self.scrollEmitEnabled  = false
-        } else {
-            self.scrollEmitEnabled  = true
-        }
-        
-        self.view.isScrollEnabled   = self.automaticallyDisableScrollOnContentSize ? self.scrollEmitEnabled : true
-    }
     
 }
 
-
-open class ReCollectionHeader : ASCellNode {
+open class ReCollectionHeader : ReCellNode {
     
     public var title : ReTextNode!
     
-    public convenience init(title: Any?) {
+    convenience init(title: Any?) {
         self.init()
         self.title = ReTextNode((title as? String) ?? "", attribute: .sublabel)
     }

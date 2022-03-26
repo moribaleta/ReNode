@@ -11,15 +11,9 @@ import RxSwift
 /**
  reactive protocol that implements binding and update
  */
-public protocol ReactiveProtocol : class {
+public protocol ReactiveProtocol : AnyObject {
     
     associatedtype StateType
-    
-    @available(*, deprecated, message: "please use reactiveBind")
-    func reBind(obx: Observable<StateType>)
-    
-    @available(*, deprecated, message: "please use reactiveUpdate")
-    func reUpdate(value: StateType)
     
     func reactiveBind(obx: Observable<StateType>)
     
@@ -36,15 +30,6 @@ public extension ReactiveProtocol {
     func reactiveUpdate(value: StateType) {
         
     }
-    
-    @available(*, deprecated, message: "please use reactiveBind")
-    func reBind(obx: Observable<StateType>) {
-        
-    }
-    
-    @available(*, deprecated, message: "please use reactiveUpdate")
-    func reUpdate(value: StateType) {
-        
-    }
+
     
 }

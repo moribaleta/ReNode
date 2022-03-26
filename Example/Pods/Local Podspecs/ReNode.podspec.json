@@ -1,9 +1,9 @@
 {
   "name": "ReNode",
-  "version": "0.1.9",
+  "version": "0.2.1",
   "summary": "A library component with common use for developing swift project.",
   "description": "A common library contains ready made components for fast development\ncombines RxSwift, ReSwift in a single package with components made from AsyncDisplayKit(Texture).",
-  "homepage": "https://github.com/moribaleta/ReNode.git",
+  "homepage": "https://gitlab.com/leapfroggr/ReNode.git",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,8 +12,8 @@
     "13190143": "moribaleta.work@gmail.com"
   },
   "source": {
-    "git": "https://github.com/moribaleta/ReNode.git",
-    "tag": "0.1.9"
+    "git": "https://gitlab.com/leapfroggr/ReNode.git",
+    "tag": "0.2.1"
   },
   "platforms": {
     "ios": "11"
@@ -35,10 +35,22 @@
     ],
     "RxCocoa": [
       "~> 6.2.0"
+    ],
+    "RxKeyboard": [
+
+    ],
+    "DateTools": [
+
+    ],
+    "SnapKit": [
+
+    ],
+    "SVGgh": [
+
     ]
   },
   "xcconfig": {
-    "HEADER_SEARCH_PATHS": "$(FRAMEWORK_SEARCH_PATHS)/ReSwiftThunk.framework/Headers"
+    "HEADER_SEARCH_PATHS": "$(FRAMEWORK_SEARCH_PATHS)/SVGgh.framework/Headers"
   },
   "swift_version": "5"
 }

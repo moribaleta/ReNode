@@ -42,7 +42,7 @@ open class ReTable<E> : ASTableNode, ASTableDataSource, ASTableDelegate, ReScrol
     
     
     ///for returning the cell node to be used
-    open var renderCell     : ((E,ASTableNode, ReCellProperties) -> ASCellNode)?
+    open var renderCell     : ((E, ASTableNode, ReCellProperties) -> ASCellNode)?
     
     /// render view for section header
     open var renderHeader   : ((Any?, ASTableNode) -> UIView)?
@@ -83,29 +83,6 @@ open class ReTable<E> : ASTableNode, ASTableDataSource, ASTableDelegate, ReScrol
     
     public var disposeBag               = DisposeBag()
     
-    /*public var refreshControl           = UIRefreshControl()
-    
-    /**
-     * obs for subscribing to refresh control changes
-     */
-    public var rxOnRefresh  : Observable<Void> {
-        self.refreshControl.rx.controlEvent(.valueChanged).asObservable()
-    }
-    
-    /**
-     * used to determine if refresh control is enabled
-     * disables automaticallyDisableScrollOnContentSize if enabled
-     */
-    public var refreshControlEnabled   : Bool = false {
-        didSet{
-            self.view.refreshControl?.isEnabled             = self.refreshControlEnabled
-            self.automaticallyDisableScrollOnContentSize    = self.refreshControlEnabled ?
-                                                                false : self.automaticallyDisableScrollOnContentSize
-        }
-    }*/
-    
-    
-    
     public var debug = ""
     
     ///subscriber for the selection in the table
@@ -131,18 +108,7 @@ open class ReTable<E> : ASTableNode, ASTableDataSource, ASTableDelegate, ReScrol
         
         
         self.emitContentChanges.onNext(())
-        
-        //self.view.refreshControl = self.refreshControl
     }
-    
-    /**
-     * sets the refresh control to start or end refreshing
-     */
-//    public func setRefreshing(_ isRefreshing : Bool) {
-//        isRefreshing ?
-//            self.refreshControl.beginRefreshing() :
-//            self.refreshControl.endRefreshing()
-//    }
     
     ///passes a single stateproperty list then maps it to a stateproperty list of sections to the table
     public func singleListBind(simple: Observable<StatePropertyList<E>>) {

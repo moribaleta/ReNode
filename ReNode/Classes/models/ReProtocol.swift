@@ -20,7 +20,7 @@ import RxSwift
 /**
     reactive protocol that implements binding and update
  */
-public protocol ReProtocol : class {
+public protocol ReProtocol : AnyObject {
     
     associatedtype StateType
     

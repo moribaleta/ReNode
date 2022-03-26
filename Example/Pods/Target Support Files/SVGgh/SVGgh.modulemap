@@ -1,0 +1,6 @@
+framework module SVGgh {
+  umbrella header "SVGgh-umbrella.h"
+
+  export *
+  module * { export * }
+}
