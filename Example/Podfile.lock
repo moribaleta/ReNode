@@ -15,7 +15,7 @@ PODS:
   - PINRemoteImage/PINCache (3.0.3):
     - PINCache (~> 3.0.3)
     - PINRemoteImage/Core
-  - ReNode (0.2.1):
+  - ReNode (0.2.4):
     - DateTools
     - ReSwift
     - ReSwiftThunk
@@ -102,7 +102,7 @@ SPEC CHECKSUMS:
   PINCache: 7a8fc1a691173d21dbddbf86cd515de6efa55086
   PINOperation: 00c935935f1e8cf0d1e2d6b542e75b88fc3e5e20
   PINRemoteImage: f1295b29f8c5e640e25335a1b2bd9d805171bd01
-  ReNode: 2c188acc608d3038383596aa020081027b048a26
+  ReNode: 343097ee4d25c0d0f1ac9d1046494bfdc518470a
   ReSwift: eab3c01e4279ba81b54a61e4fd6499634d20123a
   ReSwiftThunk: 7ca5145764be6f30b62db88a52d170133954629e
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42

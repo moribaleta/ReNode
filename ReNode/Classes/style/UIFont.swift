@@ -9,14 +9,28 @@ import Foundation
 import UIKit
 
 public extension UIFont {
+    
+    static var bundle : Bundle {
+        Bundle(for: FASFontLoader.self)
+    }
+    
     static func icon(from font: Fonts, ofSize size: CGFloat) -> UIFont {
-        let fontName = font.rawValue
+        /*let fontName = font.rawValue
         let fontNames = UIFont.fontNames(forFamilyName: font.rawValue)
         if !fontNames.contains(fontName)
         {
-            FontLoader.loadFont(withName: fontName)
+            FontLoader.loadFont(fontName)
         }
-        return UIFont(name: fontName, size: size)!
+        return UIFont(name: fontName, size: size)!*/
+        
+        return FASFontLoader
+            .loadCustomFont(
+                family: font.rawValue,
+                name: font.rawValue,
+                fileName: "SeriousMD",
+                type: "ttf",
+                size: size,
+                bundle: UIFont.bundle)
     }
     
     static func font(_ font: Fonts, ofSize size: CGFloat) -> UIFont {
