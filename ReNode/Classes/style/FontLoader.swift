@@ -49,6 +49,19 @@ class FontLoader: NSObject {
                     reason: errorDescription as String,
                     userInfo: [NSUnderlyingErrorKey: nsError]).raise()
     }
+    
+    class func loadFont(withName fontName: String) {
+        guard
+          let bundleURL = Bundle(for: self).url(forResource: "ReNode", withExtension: "bundle"),
+          let bundle    = Bundle(url: bundleURL),
+          let fontURL   = bundle.url(forResource: fontName, withExtension: "ttf"),
+          let fontData  = try? Data(contentsOf: fontURL) as CFData,
+          let provider  = CGDataProvider(data: fontData),
+          let font      = CGFont(provider) else {
+            return
+        }
+        CTFontManagerRegisterGraphicsFont(font, nil)
+      }
 }
 
 
