@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'ReNode'
-    s.version          = '0.2.41'
+    s.version          = '0.2.42'
     s.summary          = 'A library component with common use for developing swift project.'
     
     # This description is used to generate tags and improve search results.
@@ -31,7 +31,8 @@ Pod::Spec.new do |s|
     
     s.ios.deployment_target = '11'
     s.swift_version = '5'
-    s.source_files = 'ReNode/Classes/**/*'
+    s.source_files  = 'ReNode/Classes/**/*'
+    s.resources     = 'ReNode/Assets/*.{ttf}'
     
     s.dependency "Texture", '~> 3.0.0'
     s.dependency "ReSwift"
