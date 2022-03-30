@@ -1,6 +1,6 @@
 //
-//  ReCorpus.swift
-//  
+//  ReThunk.swift
+//
 //
 //  Created by Gabriel Mori Baleta on 8/4/21.
 //
@@ -9,54 +9,92 @@ import Foundation
 import ReSwift
 import ReSwiftThunk
 
-public extension Store {
-    
-    ///accepts ReCorpus actions
-    func dispatchCorpus<T> (_ action: T) where T : ReCorpus {
-        self.dispatch(action.bodybuilder())
-    }
-    
-}
 
 /**
  * basic definition of ReCorpus
  */
 public protocol ReCorpusBase : Action {
-    var  name   : String {get}
+    var  name       : String {get}
+    func body<State>(_ dispatch: @escaping DispatchFunc, _ getState: @escaping () -> State?) -> Void
 }
 
 /**
  * protocol implements thunk operation
  */
 public protocol ReCorpus : ReCorpusBase {
-    
     associatedtype State : StateType
-    
-    func body(_ dispatchbody: @escaping DispatchBody) -> Thunk<State>
-    func bodybuilder() -> Thunk<State>
-    func execute(dispatch: @escaping Dispatcher, getState: () -> State?) -> Void
+    func execute(dispatch: @escaping DispatchFunc, getState: GetState) -> Void
 }
 
+public typealias DispatchFunc = DispatchFunction
 
 public extension ReCorpus {
     
     typealias GetState          = () -> State?
-    typealias DispatchBody      = (@escaping  DispatchFunction, GetState) -> ()
+    typealias DispatchBody      = (@escaping  DispatchFunc, GetState) -> ()
     typealias Dispatcher        = DispatchFunction
     
     var name: String {
         return String(describing: self)
     }
     
-    func body(_ dispatchbody: @escaping DispatchBody) -> Thunk<State> {
-        Thunk{
-            dispatch, getstate in
-            dispatchbody(dispatch, getstate)
+    func body<State>(_ dispatch: @escaping DispatchFunc, _ getState: @escaping () -> State?) {
+        self.execute(dispatch: dispatch) {
+            return getState() as? Self.State
         }
     }
     
-    func bodybuilder() -> Thunk<State> {
-        return self.body(self.execute)
-    }
+}//ReCorpus
 
+/*
+ * convenience model for creating quick corpus action without extended ReCorpus or ReCorpusBase
+ */
+public struct ReCorpusAction<T> : ReCorpusBase where T : StateType {
+    
+    public typealias callable   = ((_ dispatch : @escaping DispatchFunc, _ getState: () -> T?) -> Void)
+    
+    public var name             : String
+
+    public var execute          : callable
+    
+    public func body<State>(_ dispatch: @escaping DispatchFunc, _ getState: @escaping () -> State?) {
+        self.execute(dispatch) {
+            return getState() as? T
+        }
+    }
+    
+    public init(name: String, execute: @escaping callable) {
+        self.name       = name
+        self.execute    = execute
+    }
 }
+
+public extension ReCorpus {
+    
+    ///packages all middleware in a single array
+    static func Middleware<T>(_ middlewares: [Middleware<T>] = []) -> [Middleware<T>] {
+        [
+            CreateCorpusMiddleWare(),
+            createThunkMiddleware(),
+        ] + middlewares
+    }
+    
+    
+    static func CreateCorpusMiddleWare<T>() -> Middleware<T> {
+        return {
+            dispatch, getState in
+            return { next in
+                return { action in
+                    switch action {
+                    case let corpus as ReCorpusBase:
+                        corpus.body(dispatch, getState)
+                    default:
+                        next(action)
+                    }
+                }
+            }
+        }
+    }//CreateCorpusMiddleWare
+    
+}
+
