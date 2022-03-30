@@ -72,7 +72,7 @@ public struct ReCorpusAction<T> : ReCorpusBase where T : StateType {
 public class StateUtilities {
     
     ///packages all middleware in a single array
-    static func Middleware<T>(_ middlewares: [Middleware<T>] = []) -> [Middleware<T>] {
+    public static func Middleware<T>(_ middlewares: [Middleware<T>] = []) -> [Middleware<T>] {
         [
             CreateCorpusMiddleWare(),
             createThunkMiddleware(),
@@ -80,7 +80,7 @@ public class StateUtilities {
     }
     
     
-    static func CreateCorpusMiddleWare<T>() -> Middleware<T> {
+    public static func CreateCorpusMiddleWare<T>() -> Middleware<T> {
         return {
             dispatch, getState in
             return { next in
