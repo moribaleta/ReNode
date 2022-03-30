@@ -69,7 +69,7 @@ public struct ReCorpusAction<T> : ReCorpusBase where T : StateType {
     }
 }
 
-public extension ReCorpus {
+public class StateUtilities {
     
     ///packages all middleware in a single array
     static func Middleware<T>(_ middlewares: [Middleware<T>] = []) -> [Middleware<T>] {
