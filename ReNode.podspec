@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'ReNode'
-    s.version          = '0.2.42'
+    s.version          = '0.2.43'
     s.summary          = 'A library component with common use for developing swift project.'
     
     # This description is used to generate tags and improve search results.
